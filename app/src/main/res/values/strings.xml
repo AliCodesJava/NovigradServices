@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">UI Service Novigrad</string>
-    <string name="FirstNameButton">Your first name</string>
-    <string name="LastNameButton">Your last name</string>
+    <string name="app_name">Services Novigrad</string>
+    <string name="FirstName">First name</string>
+    <string name="LastName">Last name</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Password2">Please repeat your password</string>
+    <string name="EmailAddress">Email address</string>
+    <string name="SubmitRegisterForm">Submit</string>
+    <string name="employeeCheckBox">Are you a Novigrad employee? Check this box to create an employee account.</string>
 </resources>

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Branch {
     private Address address;
     private WeeklySchedule schedule;
-    private ArrayList<Employee> employeeList;
 
     public Branch(Address address, WeeklySchedule schedule) {
         this.address = address;
@@ -21,10 +20,6 @@ public class Branch {
 
     public WeeklySchedule getSchedule() {
         return schedule;
-    }
-
-    public ArrayList<Employee> getEmployeeList() {
-        return employeeList;
     }
 
     public void setAddress(Address address) {

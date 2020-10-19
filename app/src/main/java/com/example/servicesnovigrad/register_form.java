@@ -52,6 +52,7 @@ public class register_form extends AppCompatActivity {
                     || !sEmail.contains(".")
                     || !(sEmail.lastIndexOf(".") > sEmail.indexOf("@") + 1)
                     || !(sEmail.lastIndexOf(".") < sEmail.length() - 1)
+                    || !(sEmail.lastIndexOf("@") > 0)
             ) {
                 Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Email is invalid, " + firstName.getText(), Snackbar.LENGTH_LONG);
                 snackbar.show();

@@ -2,8 +2,8 @@ package com.example.servicesnovigrad;
 
 public class Address {
     private String streetNumber; // can contain letters, so kept it as a String
-    private short apartmentNumber;
     private String streetName;
+    private short apartmentNumber;
     private String city;
     private String postalCode;
 
@@ -43,7 +43,7 @@ public class Address {
     }
 
     @Override
-    public String toString() { //TODO check for official formatting
+    public String toString() { //TODO prochaine livrable (2) check for official formatting
         return "com.example.servicesnovigrad.Address{" +
                 "streetNumber='" + streetNumber + '\'' +
                 ", apartmentNumber=" + apartmentNumber +

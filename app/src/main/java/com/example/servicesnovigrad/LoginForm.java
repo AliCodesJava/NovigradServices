@@ -15,14 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-public class LoginAndWelcomeForm extends AppCompatActivity {
+public class LoginForm extends AppCompatActivity {
     private User user = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_form);
     }
 
     public void openRegistrationFormOnClick(View view) {
@@ -71,7 +69,7 @@ public class LoginAndWelcomeForm extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(LoginAndWelcomeForm.this, Accueil.class);
+                Intent intent = new Intent(LoginForm.this, Accueil.class);
                 intent.putExtra(RegisterForm.EXTRA_USERNAME, user.getUsername());
                 String role = user.getClass().getName();
                 intent.putExtra(RegisterForm.EXTRA_ROLE, role.substring(role.lastIndexOf(".") + 1));

@@ -39,7 +39,6 @@ public class RegisterForm extends AppCompatActivity {
             snackbar.show();
             return;
         }
-
         //checks if the passwords entered match
         if (!password1.getText().toString().equals(password2.getText().toString())) {
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
@@ -73,13 +72,13 @@ public class RegisterForm extends AppCompatActivity {
             /*
             Pointage vers le path voulu pour stocker les données au bon endroit
             */
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Person/Employees");
+            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees");
         }
         else {
             user = new Client(username.getText().toString(), password1.getText().toString(), email.getText().toString(),
                             firstName.getText().toString(), lastName.getText().toString(), null);
 
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Person/Clients");
+            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients");
         }
 
         /*

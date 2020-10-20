@@ -18,6 +18,9 @@ public class Person extends User{
         this.mainBranch = mainBranch;
     }
 
+    public Person() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

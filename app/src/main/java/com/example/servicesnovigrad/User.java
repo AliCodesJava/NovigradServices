@@ -5,6 +5,9 @@ public class User {
     private String password;
     private String emailAddress;
 
+    public User(){
+
+    }
     public User(String username, String password, String emailAddress) {
         this.username = username;
         this.password = password;
@@ -25,8 +28,11 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public boolean checkPassword(String password){
-        return this.password == password;
+        return this.password.equals(password);
     }
 }

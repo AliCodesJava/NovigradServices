@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.TextureView;
-import android.view.View;
 import android.widget.TextView;
 
-public class accueil extends AppCompatActivity {
+public class Accueil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +16,8 @@ public class accueil extends AppCompatActivity {
         TextView name = findViewById(R.id.nameTextView);
         TextView type = findViewById(R.id.accountTypeTextView);
         Intent intent = getIntent();
-        name.setText(intent.getStringExtra(register_form.EXTRA_USERNAME));
-        type.setText(intent.getStringExtra(register_form.EXTRA_ROLE));
+        name.setText(intent.getStringExtra(RegisterForm.EXTRA_USERNAME));
+        type.setText(intent.getStringExtra(RegisterForm.EXTRA_ROLE));
 
     }
 }

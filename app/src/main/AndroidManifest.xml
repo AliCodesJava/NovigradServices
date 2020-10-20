@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".accueil"></activity>
-        <activity android:name=".register_form" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Accueil"></activity>
+        <activity android:name=".RegisterForm" />
+        <activity android:name=".LoginAndWelcomeForm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

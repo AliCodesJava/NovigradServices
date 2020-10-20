@@ -1,13 +1,14 @@
 package com.example.servicesnovigrad;
 
 public class Address {
-    private String streetNumber; //Can contain letters, so kept it as a String
+    private String streetNumber; // can contain letters, so kept it as a String
     private short apartmentNumber;
     private String streetName;
     private String city;
     private String postalCode;
 
-    public Address(String streetNumber, short apartmentNumber, String streetName, String city, String postalCode) {
+    public Address(String streetNumber, short apartmentNumber, String streetName,
+                   String city, String postalCode) {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.streetName = streetName;
@@ -18,39 +19,25 @@ public class Address {
     public String getStreetNumber() {
         return streetNumber;
     }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
     public short getApartmentNumber() {
         return apartmentNumber;
     }
-
-    public void setApartmentNumber(short apartmentNumber) {
-        this.apartmentNumber = apartmentNumber;
-    }
-
     public String getStreetName() {
         return streetName;
     }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
     public String getCity() {
         return city;
     }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getPostalCode() {
         return postalCode;
     }
 
+    public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
+    public void setApartmentNumber(short apartmentNumber) { this.apartmentNumber = apartmentNumber; }
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+    public void setCity(String city) { this.city = city; }
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }

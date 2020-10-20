@@ -17,7 +17,6 @@ public class Branch {
     public Address getAddress() {
         return address;
     }
-
     public WeeklySchedule getSchedule() {
         return schedule;
     }

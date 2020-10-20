@@ -14,17 +14,24 @@ public class WeeklySchedule {
         openHours = new EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>>(DayOfWeek.class);
     }
 
+    public ArrayList<Pair<Short, Short>> getOpenHours(DayOfWeek day) {
+        if (!openHours.containsKey(day))
+            openHours.put(day, new ArrayList<Pair<Short, Short>>());
+        return openHours.get(day);
+    }
+    public EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>> getOpenHours() {
+        return openHours;
+    }
+
     /*
         Adds a pair of openingTime, closingTime for a specific day of the week;
         Time is in minutes from 0:00
     */
     public void addOpenHours(DayOfWeek day, short openingTime, short closingTime) {
         if (openingTime > closingTime)
-            throw new InvalidParameterException("Do not use an opening time larger than the closing time");
-        if (openingTime >= 60 * 24)
-            openingTime = 60 * 24 - 1;
-        if (closingTime >= 60 * 24)
-            closingTime = 60 * 24 - 1;
+            throw new InvalidParameterException("ERROR : Opening time is larger than closing time");
+        if (openingTime >= 60 * 24) openingTime = 60 * 24 - 1;
+        if (closingTime >= 60 * 24) closingTime = 60 * 24 - 1;
 
         if (!openHours.containsKey(day))
             openHours.put(day, new ArrayList<Pair<Short, Short>>());
@@ -32,7 +39,8 @@ public class WeeklySchedule {
     }
 
     /*
-    Removes the pair of openingTime, closingTime of index index in the array contained for a particular day
+        Removes the pair of openingTime, closingTime of index
+        in the array contained for a particular day
     */
     public Pair<Short, Short> removeOpenHours(DayOfWeek day, int index){
         if(index<0)
@@ -41,14 +49,6 @@ public class WeeklySchedule {
             throw new InvalidParameterException("This day does not contain any scheduled openHours");
         else
             return openHours.get(day).remove(index);
-    }
-    public ArrayList<Pair<Short, Short>> getOpenHours(DayOfWeek day) {
-        if (!openHours.containsKey(day))
-            openHours.put(day, new ArrayList<Pair<Short, Short>>());
-        return openHours.get(day);
-    }
-    public EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>> getOpenHours() {
-        return openHours;
     }
 
     @Override

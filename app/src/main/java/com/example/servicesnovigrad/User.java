@@ -10,22 +10,23 @@ public class User {
         this.password = password;
         this.emailAddress = emailAddress;
     }
-    public boolean checkPassword(String password){
-        return this.password == password;
-    }
+
     public String getUsername() {
         return username;
     }
-
     public String getEmailAddress() {
         return emailAddress;
     }
+    public String getPassword(){ return password; }
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public boolean checkPassword(String password){
+        return this.password == password;
     }
 }

@@ -14,12 +14,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/title2"
-            android:layout_width="match_parent"
+            android:id="@+id/appTitle"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="@font/actor"
-            android:text="Novigrad Service"
+            android:text="@string/appTitle"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -39,18 +39,18 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/serviceName1"
+            android:id="@+id/inputText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="60dp"
             android:layout_weight="0"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Service name" />
+            android:hint="Service name"
+            android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/functionnality"
+            android:id="@+id/functionnality1"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

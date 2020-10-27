@@ -11,15 +11,17 @@
         android:layout_height="match_parent"
         android:background="#D0BFFF"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-26dp"
+        tools:layout_editor_absoluteY="-30dp">
 
         <TextView
-            android:id="@+id/title2"
-            android:layout_width="match_parent"
+            android:id="@+id/appTitle"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="@font/actor"
-            android:text="Novigrad Service"
+            android:text="@string/appTitle"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -39,7 +41,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/ServiceName"
+            android:id="@+id/serviceName"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -47,18 +49,18 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/serviceName1"
-            android:layout_width="280dp"
+            android:id="@+id/inputText"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="60dp"
             android:layout_weight="0"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Service name" />
+            android:hint="Service/document type/information"
+            android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/functionnality"
+            android:id="@+id/functionnality1"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -88,7 +90,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality7"
+            android:id="@+id/functionnality4"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -98,7 +100,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality8"
+            android:id="@+id/functionnality5"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"

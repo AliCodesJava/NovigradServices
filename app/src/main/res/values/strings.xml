@@ -22,4 +22,9 @@
     <string name="serviceModification3">Remove a required document</string>
     <string name="serviceModification4">Add a required information</string>
     <string name="serviceModification5">Remove required information</string>
+    <string name="manageClientMessage">Administrator, which client account would you like to remove?</string>
+    <string name="clientModification1">Remove the client account with this username</string>
+    <string name="manageEmployeeMessage">Administrator, which employee account would you like to remove?</string>
+    <string name="employeeModification1">Remove this employee account</string>
+    <string name="appTitle">Services Novigrad</string>
 </resources>

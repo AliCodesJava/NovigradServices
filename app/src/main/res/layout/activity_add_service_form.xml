@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#D3FFA2"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 

@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C51F1F"
+    android:backgroundTint="#FFFFFF"
     tools:context=".AdminMenu">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0"
+        android:background="#C83232"
+        android:backgroundTint="#FFCFFC"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 

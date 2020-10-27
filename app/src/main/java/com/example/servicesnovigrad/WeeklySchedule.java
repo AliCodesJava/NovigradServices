@@ -37,7 +37,6 @@ public class WeeklySchedule {
             openHours.put(day, new ArrayList<Pair<Short, Short>>());
         openHours.get(day).add(new Pair<Short, Short>(openingTime, closingTime));
     }
-
     /*
         Removes the pair of openingTime, closingTime of index
         in the array contained for a particular day

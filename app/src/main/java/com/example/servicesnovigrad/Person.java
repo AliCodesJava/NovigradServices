@@ -9,6 +9,7 @@ public class Person extends User{
     private ArrayList<Address> addressList;
     private Branch mainBranch;
 
+    public Person(){}
     public Person(String username, String password, String emailAddress,
                   String firstName, String lastName, Branch mainBranch) {
         super(username, password, emailAddress);
@@ -16,9 +17,6 @@ public class Person extends User{
         this.lastName = lastName;
         this.addressList = new ArrayList<>();
         this.mainBranch = mainBranch;
-    }
-
-    public Person() {
     }
 
     public String getFirstName() {
@@ -44,13 +42,13 @@ public class Person extends User{
         this.mainBranch = mainBranch;
     }
 
+    public void addAddress(Address address){
+        addressList.add(address);
+    }
     public Address removeAddress(Address address){
         if (!addressList.contains(address))
             throw new NoSuchElementException("This address is not present in the person's addressList");
         addressList.remove(address);
         return address;
-    }
-    public void addAddress(Address address){
-        addressList.add(address);
     }
 }

@@ -14,7 +14,7 @@
         <activity android:name=".AddServiceForm" />
         <activity android:name=".Accueil" />
         <activity android:name=".RegisterForm" />
-        <activity android:name=".LoginAndWelcomeForm">
+        <activity android:name=".LoginForm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

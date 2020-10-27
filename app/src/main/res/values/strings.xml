@@ -8,4 +8,18 @@
     <string name="EmailAddress">Email address</string>
     <string name="SubmitRegisterForm">Submit</string>
     <string name="employeeCheckBox">Are you a Novigrad employee? Check this box to create an employee account.</string>
+    <string name="adminFunctionnality1">Manage services</string>
+    <string name="adminFunctionnality2">Manage employees</string>
+    <string name="adminFunctionnality3">Manage client accounts</string>
+    <string name="adminInfo">Welcome, administrator. What would you like to do today?</string>
+    <string name="addServiceMessage">Administrator, what would you like to change in the services offered in service novigrad?</string>
+    <string name="addService">Add the service</string>
+    <string name="removeService">Remove the service</string>
+    <string name="modifyService">Modify the service</string>
+    <string name="modifyServiceMessage">Administrator, what would you like to change about this service?</string>
+    <string name="serviceModification1">Change the service name</string>
+    <string name="serviceModification2">Add a required document</string>
+    <string name="serviceModification3">Remove a required document</string>
+    <string name="serviceModification4">Add a required information</string>
+    <string name="serviceModification5">Remove required information</string>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterForm extends AppCompatActivity {
@@ -47,7 +48,6 @@ public class RegisterForm extends AppCompatActivity {
             snackbar.show();
             return;
         }
-
         //checks if the email is a correctly formatted
         String sEmail = email.getText().toString();
         if (!sEmail.contains("@")

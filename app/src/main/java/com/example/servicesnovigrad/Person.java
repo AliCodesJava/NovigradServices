@@ -7,16 +7,14 @@ public class Person extends User{
     private String firstName;
     private String lastName;
     private ArrayList<Address> addressList;
-    private Branch mainBranch;
 
     public Person(){}
     public Person(String username, String password, String emailAddress,
-                  String firstName, String lastName, Branch mainBranch) {
+                  String firstName, String lastName) {
         super(username, password, emailAddress);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.addressList = new ArrayList<>();
-        this.mainBranch = mainBranch;
+        this.addressList = new ArrayList<Address>();
     }
 
     public String getFirstName() {
@@ -28,18 +26,12 @@ public class Person extends User{
     public ArrayList<Address> getAddressList() {
         return addressList;
     }
-    public Branch getMainBranch() {
-        return mainBranch;
-    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-    public void setMainBranch(Branch mainBranch) {
-        this.mainBranch = mainBranch;
     }
 
     public void addAddress(Address address){

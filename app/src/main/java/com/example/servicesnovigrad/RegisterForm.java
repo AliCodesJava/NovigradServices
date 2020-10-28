@@ -76,7 +76,7 @@ public class RegisterForm extends AppCompatActivity {
         }
         else {
             user = new Client(username.getText().toString(), password1.getText().toString(), email.getText().toString(),
-                            firstName.getText().toString(), lastName.getText().toString(), null);
+                            firstName.getText().toString(), lastName.getText().toString());
 
             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients");
         }

@@ -34,7 +34,10 @@ public class AddServiceForm extends AppCompatActivity {
 
         intent = getIntent();
         adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
+<<<<<<< HEAD
 
+=======
+>>>>>>> fc6597b97a35f16d11415339cd38319bb7a411ad
         DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
         DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
             TextView serviceType = findViewById(R.id.serviceNameId);
@@ -42,6 +45,7 @@ public class AddServiceForm extends AppCompatActivity {
             
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+<<<<<<< HEAD
                 for(DataSnapshot child : dataSnapshot.getChildren()) {
                     Service service = child.getValue(Service.class);
 
@@ -49,6 +53,10 @@ public class AddServiceForm extends AppCompatActivity {
 
                     Log.d("boo", "" + service);
                 }
+=======
+                for (DataSnapshot child : dataSnapshot.getChildren()){
+                Log.d("boo", "" + servList.add(dataSnapshot.getValue(Service.class)));}
+>>>>>>> fc6597b97a35f16d11415339cd38319bb7a411ad
                 Service.serviceList = servList;
             }
 
@@ -57,11 +65,19 @@ public class AddServiceForm extends AppCompatActivity {
                 Log.e("Recreate serviceList error", databaseError.getMessage());
             }
         });
+<<<<<<< HEAD
 
     }
 
     public void addService(View view){
         Log.d("boo", "" + Arrays.toString(servList.toArray()));
+=======
+    }
+
+    public void addService(View view){
+
+        Log.d("servicesLists", "" + Arrays.toString(Service.serviceList.toArray()));
+>>>>>>> fc6597b97a35f16d11415339cd38319bb7a411ad
 
         TextView serviceName = findViewById(R.id.serviceNameId);
         TextView servicePrice = findViewById(R.id.servicePriceId);

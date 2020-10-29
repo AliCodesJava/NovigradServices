@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="manageServices"
             android:text="@string/adminFunctionnality1"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="manageClients"
             android:text="@string/adminFunctionnality3"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="manageEmployees"
             android:text="@string/adminFunctionnality2"
             android:textColor="#0C2A95"
             android:textSize="24sp" />

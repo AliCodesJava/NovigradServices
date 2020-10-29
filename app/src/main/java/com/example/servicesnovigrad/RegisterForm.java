@@ -87,7 +87,7 @@ public class RegisterForm extends AppCompatActivity {
         */
         DatabaseHelper.dbr.child(user.getUsername()).setValue(user);
 
-        Intent intent = new Intent(this, Accueil.class);
+        Intent intent = new Intent(this, LoginForm.class);
         intent.putExtra(EXTRA_USERNAME, user.getUsername());
         String role = user.getClass().getName();
         intent.putExtra(EXTRA_ROLE, role.substring(role.lastIndexOf(".") + 1));

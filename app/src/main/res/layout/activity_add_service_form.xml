@@ -11,7 +11,9 @@
         android:layout_height="match_parent"
         android:background="#D3FFA2"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="109dp">
 
         <TextView
             android:id="@+id/appTitle"
@@ -39,7 +41,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/inputText"
+            android:id="@+id/serviceNameId"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -49,12 +51,24 @@
             android:hint="Service name"
             android:inputType="textPersonName" />
 
+        <EditText
+            android:id="@+id/servicePriceId"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
+            android:layout_weight="0"
+            android:ems="10"
+            android:hint="Service price"
+            android:inputType="textPersonName" />
+
         <TextView
             android:id="@+id/functionnality1"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="0"
+            android:onClick="addService"
             android:text="@string/addService"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -65,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="removeService"
             android:text="@string/removeService"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -75,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="modifyService"
             android:text="@string/modifyService"
             android:textColor="#0C2A95"
             android:textSize="24sp" />

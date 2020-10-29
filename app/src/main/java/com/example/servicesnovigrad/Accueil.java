@@ -12,9 +12,11 @@ public class Accueil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
+        Intent intent = getIntent();
+
         TextView name = findViewById(R.id.nameTextView);
         TextView type = findViewById(R.id.accountTypeTextView);
-        Intent intent = getIntent();
+
         name.setText(intent.getStringExtra(RegisterForm.EXTRA_USERNAME));
         type.setText(intent.getStringExtra(RegisterForm.EXTRA_ROLE));
     }

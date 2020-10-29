@@ -6,19 +6,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Service {
-    public static ArrayList<Service> serviceList;
+    public static ArrayList<Service> serviceList= new ArrayList<Service>();
     private String serviceType;
     private int servicePrice;
     private ArrayList<DocumentType> requiredDocument;
     private ArrayList<String> requiredInformation;
 
-    public Service(){}
+    public Service(){
+        requiredDocument = new ArrayList<DocumentType>();
+        requiredInformation = new ArrayList<String>();}
     public Service(String serviceType, int servicePrice){
-        serviceList = new ArrayList<Service>();
         this.serviceType = serviceType;
         this.servicePrice = servicePrice;
         requiredDocument = new ArrayList<DocumentType>();
         requiredInformation = new ArrayList<String>();
+    }
+
+
+
+    public void setRequiredDocument(ArrayList<DocumentType> requiredDocument) {
+        this.requiredDocument = requiredDocument;
+    }
+
+    public void setRequiredInformation(ArrayList<String> requiredInformation) {
+        this.requiredInformation = requiredInformation;
     }
 
     public String getServiceType() { return serviceType; }

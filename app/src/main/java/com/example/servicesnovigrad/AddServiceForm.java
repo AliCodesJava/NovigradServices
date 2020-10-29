@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,15 +35,21 @@ public class AddServiceForm extends AppCompatActivity {
         intent = getIntent();
         adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
 
+        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
         DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
+            TextView serviceType = findViewById(R.id.serviceNameId);
+            TextView servicePrice = findViewById(R.id.servicePriceId);
+            
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.d("boo", "" + servList.add(child.getValue(Service.class)));
+                    Service service = child.getValue(Service.class);
 
+                    servList.add(service);
 
-
+                    Log.d("boo", "" + service);
                 }
+                Service.serviceList = servList;
             }
 
             @Override
@@ -54,12 +58,10 @@ public class AddServiceForm extends AppCompatActivity {
             }
         });
 
-        Service.serviceList = servList;
     }
 
     public void addService(View view){
-
-        Log.d("servicesLists", "" + Arrays.toString(servList.toArray()));
+        Log.d("boo", "" + Arrays.toString(servList.toArray()));
 
         TextView serviceName = findViewById(R.id.serviceNameId);
         TextView servicePrice = findViewById(R.id.servicePriceId);

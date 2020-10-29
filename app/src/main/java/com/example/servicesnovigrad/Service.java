@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Service {
-    public static ArrayList<Service> serviceList;
+    public static ArrayList<Service> serviceList = new ArrayList<Service>();
     private String serviceType;
     private int servicePrice;
     private ArrayList<DocumentType> requiredDocument;
     private ArrayList<String> requiredInformation;
 
-    public Service(){}
+    public Service(){
+        serviceType = "";
+        servicePrice = 0;
+        requiredDocument = new ArrayList<DocumentType>();
+        requiredInformation = new ArrayList<String>();
+    }
     public Service(String serviceType, int servicePrice){
-        serviceList = new ArrayList<Service>();
         this.serviceType = serviceType;
         this.servicePrice = servicePrice;
         requiredDocument = new ArrayList<DocumentType>();
@@ -27,7 +31,7 @@ public class Service {
     public ArrayList<String> getRequiredInformation() { return requiredInformation; }
 
     public void setServiceType(String serviceType) { this.serviceType = serviceType; }
-    public void setServicePrice(short servicePrice) { this.servicePrice = servicePrice; }
+    public void setServicePrice(int servicePrice) { this.servicePrice = servicePrice; }
 
     public boolean addRequiredDoc(DocumentType documentType){ return requiredDocument.add(documentType); }
     public boolean removeRequiredDoc(DocumentType documentType){

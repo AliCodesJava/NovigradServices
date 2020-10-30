@@ -41,7 +41,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/serviceName"
+            android:id="@+id/selectedServiceTextView"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -49,61 +49,85 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/serviceNameId"
+            android:id="@+id/inputId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="50dp"
             android:layout_weight="0"
             android:ems="10"
             android:hint="Service/document type/information"
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/functionnality1"
+            android:id="@+id/selectServiceId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_margin="8dp"
             android:layout_weight="0"
+            android:onClick="selectService"
+            android:text="Select service by name"
+            android:textColor="#0C2A95"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/changeServiceNameId"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="0"
+            android:onClick="changeServiceName"
             android:text="@string/serviceModification1"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality2"
+            android:id="@+id/changeServicePriceId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_margin="8dp"
             android:layout_weight="0"
+            android:onClick="changeServicePrice"
+            android:text="Change the service price"
+            android:textColor="#0C2A95"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/addRequiredDocId"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="0"
+            android:onClick="addRequiredDocument"
             android:text="@string/serviceModification2"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality3"
+            android:id="@+id/removeRequiredDocId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_margin="8dp"
             android:layout_weight="0"
             android:text="@string/serviceModification3"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality4"
+            android:id="@+id/addRequiredInfoId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_margin="8dp"
             android:layout_weight="0"
             android:text="@string/serviceModification4"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality5"
+            android:id="@+id/removeRequiredInfoId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_margin="8dp"
             android:layout_weight="0"
             android:text="@string/serviceModification5"
             android:textColor="#0C2A95"

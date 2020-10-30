@@ -15,10 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AddServiceForm extends AppCompatActivity {
@@ -53,7 +49,7 @@ public class AddServiceForm extends AppCompatActivity {
     }
 
     public void addService(View view){
-        TextView serviceName = findViewById(R.id.serviceNameId);
+        TextView serviceName = findViewById(R.id.inputId);
         TextView servicePrice = findViewById(R.id.servicePriceId);
         
         if(serviceName.getText().toString().length() == 0 
@@ -63,8 +59,13 @@ public class AddServiceForm extends AppCompatActivity {
                 "Service \"" + serviceName.getText().toString() + "\" added",
                 Snackbar.LENGTH_LONG);
 
-        Service newService = new Service(serviceName.getText().toString(),
-                            Integer.parseInt(servicePrice.getText().toString()));
+        Service newService = null;
+        try {
+            newService = new Service(serviceName.getText().toString(),
+                    Integer.parseInt(servicePrice.getText().toString()));
+        }catch(NumberFormatException numberFormatException){
+            return;
+        }
 
         // cherche si le nouveau service existe déja en regardant s'il le nom a déja été utilisé
         boolean serviceAlreadyExists = false;
@@ -93,7 +94,7 @@ public class AddServiceForm extends AppCompatActivity {
         successSnackbar.show();
     }
     public void removeService(View view){
-        TextView serviceName = (TextView)findViewById(R.id.serviceNameId);
+        TextView serviceName = (TextView)findViewById(R.id.inputId);
 
         if(serviceName.getText().toString().length() == 0){ return; }
 

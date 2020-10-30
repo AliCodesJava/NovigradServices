@@ -39,7 +39,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/serviceNameId"
+            android:id="@+id/inputId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -50,7 +50,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/functionnality1"
+            android:id="@+id/changeServicePriceId"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

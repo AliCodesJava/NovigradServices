@@ -41,7 +41,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/serviceNameId"
+            android:id="@+id/inputId"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/functionnality1"
+            android:id="@+id/changeServicePriceId"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -73,7 +73,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality2"
+            android:id="@+id/addRequiredDocId"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -84,7 +84,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/functionnality3"
+            android:id="@+id/removeRequiredDocId"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"

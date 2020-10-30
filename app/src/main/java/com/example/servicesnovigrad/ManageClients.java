@@ -17,7 +17,7 @@ public class ManageClients extends AppCompatActivity {
     }
 
     public void deleteClientAccount(View view){
-        TextView textView = (TextView)findViewById(R.id.serviceNameId);
+        TextView textView = (TextView)findViewById(R.id.inputId);
         DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients")
                             .child(textView.getText().toString());
         DatabaseHelper.dbr.setValue(null);

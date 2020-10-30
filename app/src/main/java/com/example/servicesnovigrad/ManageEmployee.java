@@ -17,7 +17,7 @@ public class ManageEmployee extends AppCompatActivity {
     }
 
     public void deleteEmployeeAccount(View view){
-        TextView textView = (TextView)findViewById(R.id.serviceNameId);
+        TextView textView = (TextView)findViewById(R.id.inputId);
         DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees")
                 .child(textView.getText().toString());
         DatabaseHelper.dbr.setValue(null);

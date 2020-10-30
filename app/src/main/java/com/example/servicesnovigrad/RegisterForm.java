@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterForm extends AppCompatActivity {

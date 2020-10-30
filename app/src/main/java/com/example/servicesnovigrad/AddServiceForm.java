@@ -55,7 +55,10 @@ public class AddServiceForm extends AppCompatActivity {
         TextView serviceName = findViewById(R.id.serviceNameId);
         TextView servicePrice = findViewById(R.id.servicePriceId);
 
-        if(serviceName.getText().toString() == "" || servicePrice.getText().toString() == ""){ return; }
+        Log.d("serviceInputs", "" + serviceName.getText());
+        
+        if(serviceName.getText().toString().length() == 0 
+            ||servicePrice.getText().toString().length() == 0){ return; }
 
         Snackbar successSnackbar = Snackbar.make(serviceName,
                 "Service \"" + serviceName.getText().toString() + "\" added",
@@ -95,7 +98,7 @@ public class AddServiceForm extends AppCompatActivity {
     public void removeService(View view){
         TextView serviceName = (TextView)findViewById(R.id.serviceNameId);
 
-        if(serviceName.getText().toString() == ""){ return; }
+        if(serviceName.getText().toString().length() == 0){ return; }
 
         Snackbar successSnackbar = Snackbar.make(serviceName,
                 "Service \"" + serviceName.getText().toString() + "\" does not exist",

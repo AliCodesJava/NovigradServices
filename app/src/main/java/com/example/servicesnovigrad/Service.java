@@ -55,6 +55,6 @@ public class Service {
     public String toString() {
         return ("(" + serviceType + "," + servicePrice +
                 "," + (Arrays.toString(requiredDocument.toArray()) +
-                "," + (Arrays.toString(requiredInformation.toArray()))));
+                "," + (Arrays.toString(requiredInformation.toArray()))) + ")");
     }
 }

@@ -55,11 +55,11 @@ public class AddServiceForm extends AppCompatActivity {
         TextView serviceName = findViewById(R.id.serviceNameId);
         TextView servicePrice = findViewById(R.id.servicePriceId);
 
+        if(serviceName.getText().toString() == "" || servicePrice.getText().toString() == ""){ return; }
+
         Snackbar successSnackbar = Snackbar.make(serviceName,
                 "Service \"" + serviceName.getText().toString() + "\" added",
                 Snackbar.LENGTH_LONG);
-
-        if(serviceName.getText().toString() == "" || servicePrice.getText().toString() == ""){ return; }
 
         Service newService = new Service(serviceName.getText().toString(),
                             Integer.parseInt(servicePrice.getText().toString()));

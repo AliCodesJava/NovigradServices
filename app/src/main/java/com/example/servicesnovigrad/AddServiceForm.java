@@ -30,11 +30,12 @@ public class AddServiceForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service_form);
 
-        Log.d("servicesLists", "" + Arrays.toString(Service.serviceList.toArray()));
-
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
         adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
+
+        // on s'assure que la liste est vide au cas ou la RAM a encore des éléments de stocker
+        Service.serviceList.clear();
 
         // on va remplir notre serviceList de tous les services stockés dans la database
         DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
@@ -54,8 +55,6 @@ public class AddServiceForm extends AppCompatActivity {
     public void addService(View view){
         TextView serviceName = findViewById(R.id.serviceNameId);
         TextView servicePrice = findViewById(R.id.servicePriceId);
-
-        Log.d("serviceInputs", "" + serviceName.getText());
         
         if(serviceName.getText().toString().length() == 0 
             ||servicePrice.getText().toString().length() == 0){ return; }
@@ -92,8 +91,6 @@ public class AddServiceForm extends AppCompatActivity {
         }
 
         successSnackbar.show();
-
-        Log.d("servicesLists", "" + Arrays.toString(Service.serviceList.toArray()));
     }
     public void removeService(View view){
         TextView serviceName = (TextView)findViewById(R.id.serviceNameId);
@@ -123,8 +120,6 @@ public class AddServiceForm extends AppCompatActivity {
         }
 
         successSnackbar.show();
-
-        Log.d("servicesLists", "" + Arrays.toString(Service.serviceList.toArray()));
     }
     public void modifyService(View view){
         intent = new Intent(this, ModifyService.class);

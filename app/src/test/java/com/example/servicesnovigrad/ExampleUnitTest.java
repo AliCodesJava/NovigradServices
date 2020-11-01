@@ -23,25 +23,41 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void addService() {
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
-        DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Service.serviceList.add(child.getValue(Service.class));
-                }
-                try {
-                    AddServiceForm.addService("DaTest", 1234);
-                    assertEquals("DaTest", AddServiceForm.removeService("DaTest").getServiceType());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+    public void testServiceConstructor() {
+        Service service = new Service("Jaune attend!", 23);
+        assertEquals("Jaune attend!", service.getServiceType());
+        assertEquals(23, service.getServicePrice());
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+    @Test
+    public void testServiceAddOneRequiredInfo() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredInfo("This information is necessary");
+        assertEquals("This information is necessary", service.getRequiredInformation().get(0));
+    }
+
+    @Test
+    public void testServiceAddTwoRequiredInfo() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredInfo("This information is necessary");
+        service.addRequiredInfo("This information is even more necessary!");
+        assertEquals("This information is necessary", service.getRequiredInformation().get(0));
+        assertEquals("This information is even more necessary!", service.getRequiredInformation().get(1));
+    }
+
+    @Test
+    public void testServiceAddOneRequiredDocumentType() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredDoc(DocumentType.PHOTO);
+        assertEquals(DocumentType.PHOTO, service.getRequiredDocument().get(0));
+    }
+    @Test
+    public void testServiceAddTwoRequiredDocumentType() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredDoc(DocumentType.PHOTO);
+        service.addRequiredDoc(DocumentType.PREUVE_DE_DOMICILE);
+        assertEquals(DocumentType.PHOTO, service.getRequiredDocument().get(0));
+        assertEquals(DocumentType.PREUVE_DE_DOMICILE, service.getRequiredDocument().get(1));
     }
 
 }

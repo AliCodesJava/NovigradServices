@@ -1,5 +1,12 @@
 package com.example.servicesnovigrad;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,6 +24,18 @@ public class ExampleUnitTest {
 
     @Test
     public void addService() {
+        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
+        DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Service.serviceList.add(child.getValue(Service.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
         try {
             AddServiceForm.addService("DaTest", 1234);
             assertEquals("DaTest", AddServiceForm.removeService("DaTest").getServiceType());

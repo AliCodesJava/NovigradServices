@@ -31,17 +31,17 @@ public class ExampleUnitTest {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Service.serviceList.add(child.getValue(Service.class));
                 }
+                try {
+                    AddServiceForm.addService("DaTest", 1234);
+                    assertEquals("DaTest", AddServiceForm.removeService("DaTest").getServiceType());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-        try {
-            AddServiceForm.addService("DaTest", 1234);
-            assertEquals("DaTest", AddServiceForm.removeService("DaTest").getServiceType());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

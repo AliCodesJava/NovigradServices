@@ -59,7 +59,7 @@
             android:layout_weight="0"
             android:ems="10"
             android:hint="Service price"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/changeServicePriceId"

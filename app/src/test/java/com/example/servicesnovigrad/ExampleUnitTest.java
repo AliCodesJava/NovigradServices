@@ -16,8 +16,13 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void addition_isNotCorrect() {
-        assertEquals(4, 3 + 2);
+    public void addService() {
+        try {
+            AddServiceForm.addService("DaTest", 1234);
+            assertEquals("DaTest", AddServiceForm.removeService("DaTest").getServiceType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

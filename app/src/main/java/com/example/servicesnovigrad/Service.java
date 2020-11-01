@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Service {
-    public static ArrayList<Service> serviceList = new ArrayList<Service>();
+    public static ArrayList<Service> serviceList = new ArrayList();
     private String serviceType;
     private int servicePrice;
     private ArrayList<DocumentType> requiredDocument;

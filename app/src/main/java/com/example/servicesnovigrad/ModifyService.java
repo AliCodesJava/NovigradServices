@@ -89,7 +89,7 @@ public class ModifyService extends AppCompatActivity {
 
         Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
-    
+
     public void addRequiredDocument(View view){
         if(currentService == null){ return; }
 
@@ -117,6 +117,45 @@ public class ModifyService extends AppCompatActivity {
             DatabaseHelper.dbr.setValue(null);
 
             currentService.addRequiredDoc(DocumentType.valueOf(input.getText().toString()));
+
+            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
+            DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
+
+            TextView status = findViewById(R.id.selectedServiceTextView);
+            status.setText("Selected service : " + currentService.getServiceType());
+        }
+        statusSnackbar.show();
+
+        Log.d("lol", "" + currentService.toString());
+    }
+
+    public void removeRequiredDocument(View view){
+        if(currentService == null){ return; }
+
+        TextView input = findViewById(R.id.inputId);
+        if(input.getText().toString().length() == 0){ return; }
+
+        boolean enumInputExists = false;
+        for(DocumentType docType : DocumentType.values()){
+            if(docType.toString().equals(input.getText().toString())){
+                enumInputExists = true;
+                break;
+            }
+        }
+
+        Snackbar statusSnackbar = Snackbar.make(input,
+                "DocumentType " + input.getText().toString() + " does not exist/already exists",
+                Snackbar.LENGTH_LONG);
+        if(enumInputExists && currentService.getRequiredDocument().contains(DocumentType.valueOf(input.getText().toString()))){
+            statusSnackbar = Snackbar.make(input,
+                    "DocumentType " + input.getText().toString() + " added",
+                    Snackbar.LENGTH_LONG);
+
+            DatabaseHelper.dbr = FirebaseDatabase.getInstance()
+                    .getReference("Services/" + currentService.getServiceType() + "/requiredDocuments");
+            DatabaseHelper.dbr.setValue(null);
+
+            currentService.removeRequiredDoc(DocumentType.valueOf(input.getText().toString()));
 
             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
             DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);

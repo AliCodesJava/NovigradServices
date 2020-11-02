@@ -14,156 +14,137 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 
 public class ModifyService extends AppCompatActivity {
-    private User adminAcc = null;
-    private TextView input;
-    private Service currentService = null;
+    private TextView inputText;
+    private TextView selectedServiceStatus;
+
+    private Service currentService;
+
+    private Snackbar validationMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_service);
 
-        input = findViewById(R.id.inputId);
-
-        Intent intent = getIntent();
-        adminAcc = (User)intent.getSerializableExtra("adminAccountObj");
+        inputText = findViewById(R.id.inputId);
+        selectedServiceStatus = findViewById(R.id.selectedServiceTextView);
     }
 
     public void selectService(View view){
-        TextView status = findViewById(R.id.selectedServiceTextView);
-
-        for(Object service : Service.serviceList.toArray()){
-            currentService = (Service)service;
-            if(currentService.getServiceType().equals(input.getText().toString())){
-                status.setText("Selected service : " + currentService.getServiceType());
+        for(Service service : Service.serviceList){
+            currentService = service;
+            if(currentService.getServiceType().equals(inputText.getText().toString())){
+                selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
                 return;
             }
         }
-
-        status.setText("This service does not exist.");
+        selectedServiceStatus.setText("This service does not exist.");
 
         Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
+
     public void changeServiceName(View view){
         if(currentService == null){ return; }
+        if(inputText.getText().toString().length() == 0){ return; }
 
-        TextView input = findViewById(R.id.inputId);
-        if(input.getText().toString().length() == 0){ return; }
-
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance()
-                .getReference("Services/" + currentService.getServiceType());
+        /*
+            ID du noeud de notre service dans la database est le nom d'utilisateur
+            on doit alors supprimé le noeud, faire la modification dans la servicesList
+            puis remettre le noeud modifié (venant de la liste) car nous ne pouvons
+            pas changé l'ID d'un noeud
+        */
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType());
         DatabaseHelper.dbr.setValue(null);
-
-        currentService.setServiceType(input.getText().toString());
-
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
+        currentService.setServiceType(inputText.getText().toString());
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Services");
         DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
 
-        TextView status = findViewById(R.id.selectedServiceTextView);
-        status.setText("Selected service : " + currentService.getServiceType());
+        selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
 
         Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
     public void changeServicePrice(View view){
         if(currentService == null){ return; }
 
-        TextView input = findViewById(R.id.inputId);
         int newPrice;
-        try {
-            newPrice = Integer.parseInt(input.getText().toString());
-        }catch(NumberFormatException numberFormatException){
-            return;
-        }
+        try { newPrice = Integer.parseInt(inputText.getText().toString()); }
+        catch(NumberFormatException numberFormatException){ return; }
 
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance()
-                .getReference("Services/" + currentService.getServiceType());
-        DatabaseHelper.dbr.setValue(null);
-
+        // on change le prix dans la database puis dans le servicesList
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/servicePrice");
+        DatabaseHelper.dbr.setValue(newPrice);
         currentService.setServicePrice(newPrice);
 
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
-        DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
-
-        TextView status = findViewById(R.id.selectedServiceTextView);
-        status.setText("Selected service : " + currentService.getServiceType());
+        selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
 
         Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
 
     public void addRequiredDocument(View view){
         if(currentService == null){ return; }
+        if(inputText.getText().toString().length() == 0){ return; }
 
-        TextView input = findViewById(R.id.inputId);
-        if(input.getText().toString().length() == 0){ return; }
+        validationMsg = Snackbar.make(inputText,
+                "DocumentType " + inputText.getText().toString() + " does not exist/already exists",
+                Snackbar.LENGTH_LONG);
 
-        boolean enumInputExists = false;
         for(DocumentType docType : DocumentType.values()){
-            if(docType.toString().equals(input.getText().toString())){
-                enumInputExists = true;
+            if(docType.toString().equals(inputText.getText().toString())
+            && !currentService.getRequiredDocument()
+            .contains(DocumentType.valueOf(inputText.getText().toString()))){
+
+                DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/requiredDocuments");
+                currentService.addRequiredDoc(DocumentType.valueOf(inputText.getText().toString()));
+                DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
+
+                selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
+
+                validationMsg = Snackbar.make(inputText,
+                        "DocumentType " + inputText.getText().toString() + " added",
+                        Snackbar.LENGTH_LONG);
+
                 break;
             }
         }
 
-        Snackbar statusSnackbar = Snackbar.make(input,
-                "DocumentType " + input.getText().toString() + " does not exist/already exists",
-                Snackbar.LENGTH_LONG);
-        if(enumInputExists && !currentService.getRequiredDocument().contains(DocumentType.valueOf(input.getText().toString()))){
-            statusSnackbar = Snackbar.make(input,
-                    "DocumentType " + input.getText().toString() + " added",
-                    Snackbar.LENGTH_LONG);
-
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance()
-                    .getReference("Services/" + currentService.getServiceType());
-            DatabaseHelper.dbr.setValue(null);
-
-            currentService.addRequiredDoc(DocumentType.valueOf(input.getText().toString()));
-
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
-            DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
-
-            TextView status = findViewById(R.id.selectedServiceTextView);
-            status.setText("Selected service : " + currentService.getServiceType());
-        }
-        statusSnackbar.show();
+        validationMsg.show();
 
         Log.d("lol", "" + currentService.toString());
     }
 
     public void removeRequiredDocument(View view){
         if(currentService == null){ return; }
+        if(inputText.getText().toString().length() == 0){ return; }
 
-        TextView input = findViewById(R.id.inputId);
-        if(input.getText().toString().length() == 0){ return; }
+        validationMsg = Snackbar.make(inputText,
+                "DocumentType " + inputText.getText().toString() + " does not exist",
+                Snackbar.LENGTH_LONG);
 
-        boolean enumInputExists = false;
-        for(DocumentType docType : DocumentType.values()){
-            if(docType.toString().equals(input.getText().toString())){
-                enumInputExists = true;
+        DocumentType[] documentTypes = DocumentType.values();
+        for(int i = 0; i<documentTypes.length; i++){
+            Log.d("pls", "yo");
+            if(documentTypes[i].toString().equals(inputText.getText().toString())
+             && currentService.getRequiredDocument()
+             .contains(DocumentType.valueOf(inputText.getText().toString()))){
+                DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
+                        + "/requiredDocuments/" + i);
+                DatabaseHelper.dbr.setValue(null);
+
+                currentService.removeRequiredDoc(currentService.getRequiredDocument().get(i));
+
+                /*DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/"
+                                        + currentService.getServiceType() + );
+                DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);*/
+
+                validationMsg = Snackbar.make(inputText,
+                        "DocumentType " + inputText.getText().toString() + " deleted",
+                        Snackbar.LENGTH_LONG);
+
                 break;
             }
         }
 
-        Snackbar statusSnackbar = Snackbar.make(input,
-                "DocumentType " + input.getText().toString() + " does not exist/already exists",
-                Snackbar.LENGTH_LONG);
-        if(enumInputExists && currentService.getRequiredDocument().contains(DocumentType.valueOf(input.getText().toString()))){
-            statusSnackbar = Snackbar.make(input,
-                    "DocumentType " + input.getText().toString() + " added",
-                    Snackbar.LENGTH_LONG);
-
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance()
-                    .getReference("Services/" + currentService.getServiceType() + "/requiredDocuments");
-            DatabaseHelper.dbr.setValue(null);
-
-            currentService.removeRequiredDoc(DocumentType.valueOf(input.getText().toString()));
-
-            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services/");
-            DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
-
-            TextView status = findViewById(R.id.selectedServiceTextView);
-            status.setText("Selected service : " + currentService.getServiceType());
-        }
-        statusSnackbar.show();
+        validationMsg.show();
 
         Log.d("lol", "" + currentService.toString());
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="removeRequiredDocument"
     tools:context=".ModifyService">
 
     <LinearLayout
@@ -45,7 +46,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Error, no service selected"
+            android:text="Please, select an existing service."
             android:textSize="24sp" />
 
         <EditText

@@ -31,7 +31,10 @@ public class AddServiceForm extends AppCompatActivity {
         intent = getIntent();
         adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
 
-        // on s'assure que la liste est vide au cas ou la RAM a encore des éléments de stocker
+        /*
+            on s'assure que la liste est vide au cas ou la RAM
+            a encore des éléments de stocker durant l'utilisation de l'app
+        */
         Service.serviceList.clear();
 
         // on va remplir notre serviceList de tous les services stockés dans la database
@@ -81,9 +84,7 @@ public class AddServiceForm extends AppCompatActivity {
         }
     }
     public static void addService(String serviceName, int servicePrice) throws Exception {
-        Service newService = null;
-        newService = new Service(serviceName,servicePrice);
-
+        Service newService = new Service(serviceName,servicePrice);
 
         // cherche si le nouveau service existe déja en regardant s'il le nom a déja été utilisé
         for(Service service : Service.serviceList){
@@ -98,8 +99,9 @@ public class AddServiceForm extends AppCompatActivity {
         DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
         DatabaseHelper.dbr.child(serviceName).setValue(newService);
     }
+
     public void removeService(View view){
-        TextView serviceName = (TextView)findViewById(R.id.inputId);
+        TextView serviceName = findViewById(R.id.inputId);
         try{
             removeService(serviceName.getText().toString());
             Snackbar successBar = Snackbar.make(view, "You have successfully removed the service \"" + serviceName.getText().toString() + "\"", Snackbar.LENGTH_LONG);
@@ -127,6 +129,7 @@ public class AddServiceForm extends AppCompatActivity {
         }
         throw new Exception("There is no such service! ");
     }
+
     public void modifyService(View view){
         intent = new Intent(this, ModifyService.class);
 

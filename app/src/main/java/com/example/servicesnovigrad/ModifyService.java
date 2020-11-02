@@ -47,8 +47,6 @@ public class ModifyService extends AppCompatActivity {
             }
         }
         selectedServiceStatus.setText("This service does not exist.");
-
-        Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
 
     public void changeServiceName(View view){
@@ -68,34 +66,57 @@ public class ModifyService extends AppCompatActivity {
         DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);
 
         selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
-
-        Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
     }
     public void changeServicePrice(View view){
         if(currentService == null){ return; }
 
-        int newPrice;
-        try { newPrice = Integer.parseInt(inputText.getText().toString()); }
-        catch(NumberFormatException numberFormatException){ return; }
+        String sPrice = inputText.getText().toString();
+        String[] priceParts = sPrice.split("\\.", 2);
+        int newPrice = 0;
+        try{
+            //checking the price format
+            if(priceParts.length == 2)
+                if(priceParts[1].length() == 2)
+                    newPrice = Integer.parseInt(priceParts[0])*100+Integer.parseInt(priceParts[1]);
+                else
+                    throw new Exception("The price should only 2 decimal digits.");
+            else
+                newPrice = Integer.parseInt(priceParts[0])*100;
 
-        // on change le prix dans la database puis dans le servicesList
-        DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/servicePrice");
-        DatabaseHelper.dbr.setValue(newPrice);
-        currentService.setServicePrice(newPrice);
+            // on change le prix dans la database puis dans le servicesList
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/servicePrice");
+            DatabaseHelper.dbr.setValue(newPrice);
+            currentService.setServicePrice(newPrice);
 
-        selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
+            selectedServiceStatus.setText("Selected service : " + currentService.getServiceType());
 
-        Log.d("lol", "" + Arrays.toString(Service.serviceList.toArray()));
+            validationMsg = Snackbar.make(view,
+                            "This service has successfully been added to the database."
+                            , Snackbar.LENGTH_LONG);
+            validationMsg.show();
+        }
+        catch (NumberFormatException e){
+            Snackbar errorMessage = Snackbar.make(view,
+                                "Please make sure your price is in the right format!"
+                                    + priceParts[0] + " " + priceParts[1],
+                                    Snackbar.LENGTH_LONG);
+            errorMessage.show();
+        }
+        catch (Exception e){
+            Snackbar errorMessage = Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG);
+            errorMessage.show();
+        }
     }
 
     public void addRequiredDocument(View view){
         if(currentService == null){ return; }
 
+        DocumentType newDocType = (DocumentType)documentTypeSpinner.getSelectedItem();
+
         validationMsg = Snackbar.make(inputText,
-                "DocumentType " + inputText.getText().toString() + " is already a required document of "
+                "DocumentType " + newDocType.toString() + " is already a required document of "
                  + currentService.getServiceType(), Snackbar.LENGTH_LONG);
 
-        DocumentType newDocType = (DocumentType)documentTypeSpinner.getSelectedItem();
         if(!currentService.getRequiredDocument().contains(newDocType)){
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
                                  + "/requiredDocument");
@@ -108,8 +129,6 @@ public class ModifyService extends AppCompatActivity {
         }
 
         validationMsg.show();
-
-        Log.d("lol", "" + currentService.serviceList);
     }
     public void removeRequiredDocument(View view){
         if(currentService == null){ return; }
@@ -122,7 +141,7 @@ public class ModifyService extends AppCompatActivity {
 
         if(currentService.getRequiredDocument().contains(removedDocType)){
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                    + "/requiredDocuments");
+                    + "/requiredDocument");
             currentService.removeRequiredDoc(removedDocType);
             DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
 
@@ -132,7 +151,52 @@ public class ModifyService extends AppCompatActivity {
         }
 
         validationMsg.show();
+    }
 
-        Log.d("lol", "" + currentService.serviceList);
+    public void addRequiredInformation(View view){
+        if(currentService == null){ return; }
+        if(inputText.getText().toString().length() == 0){ return; }
+
+        String newInfo = inputText.getText().toString();
+
+        validationMsg = Snackbar.make(inputText,
+                "Information " + newInfo + " is already a required information of "
+                + currentService.getServiceType(), Snackbar.LENGTH_LONG);
+
+        if(!currentService.getRequiredInformation().contains(newInfo)){
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
+                    + "/requiredInformation");
+            currentService.addRequiredInfo(newInfo);
+            DatabaseHelper.dbr.setValue(currentService.getRequiredInformation());
+
+            validationMsg = Snackbar.make(inputText,
+                    "Information " + newInfo.toString() + " added",
+                    Snackbar.LENGTH_LONG);
+        }
+
+        validationMsg.show();
+    }
+    public void removeRequiredInformation(View view){
+        if(currentService == null){ return; }
+        if(inputText.getText().toString().length() == 0){ return; }
+
+        String removedInfo = inputText.getText().toString();
+
+        validationMsg = Snackbar.make(inputText,
+                "Information " + removedInfo + " does not exist in "
+                + currentService.getServiceType() + " service", Snackbar.LENGTH_LONG);
+
+        if(currentService.getRequiredInformation().contains(removedInfo)){
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
+                                 + "/requiredInformation");
+            currentService.removeRequiredInfo(removedInfo);
+            DatabaseHelper.dbr.setValue(currentService.getRequiredInformation());
+
+            validationMsg = Snackbar.make(inputText,
+                    "Information " + removedInfo + " removed",
+                    Snackbar.LENGTH_LONG);
+        }
+
+        validationMsg.show();
     }
 }

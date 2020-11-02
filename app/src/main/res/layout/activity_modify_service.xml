@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="removeRequiredDocument"
     tools:context=".ModifyService">
 
     <LinearLayout
@@ -116,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="0"
+            android:onClick="removeRequiredDocument"
             android:text="@string/serviceModification3"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -126,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="0"
+            android:onClick="addRequiredInformation"
             android:text="@string/serviceModification4"
             android:textColor="#0C2A95"
             android:textSize="24sp" />
@@ -136,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="0"
+            android:onClick="removeRequiredInformation"
             android:text="@string/serviceModification5"
             android:textColor="#0C2A95"
             android:textSize="24sp" />

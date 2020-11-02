@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +30,9 @@ public class ModifyService extends AppCompatActivity {
 
         inputText = findViewById(R.id.inputId);
         selectedServiceStatus = findViewById(R.id.selectedServiceTextView);
+
+        Spinner documentSpinner = findViewById(R.id.requiredDocumentSpinner);
+        documentSpinner.setAdapter(new ArrayAdapter<DocumentType>(this, android.R.layout.simple_spinner_item, DocumentType.values()));
     }
 
     public void selectService(View view){

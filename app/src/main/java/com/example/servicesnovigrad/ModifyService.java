@@ -98,7 +98,7 @@ public class ModifyService extends AppCompatActivity {
         DocumentType newDocType = (DocumentType)documentTypeSpinner.getSelectedItem();
         if(!currentService.getRequiredDocument().contains(newDocType)){
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                                 + "/requiredDocuments");
+                                 + "/requiredDocument");
             currentService.addRequiredDoc(newDocType);
             DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
 
@@ -122,7 +122,7 @@ public class ModifyService extends AppCompatActivity {
 
         if(currentService.getRequiredDocument().contains(removedDocType)){
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                    + "/requiredDocuments");
+                    + "/requiredDocument");
             currentService.removeRequiredDoc(removedDocType);
             DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
 

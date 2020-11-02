@@ -55,12 +55,19 @@ public class AddServiceForm extends AppCompatActivity {
     public void addService(View view){
         TextView serviceName = findViewById(R.id.inputId);
         TextView servicePrice = findViewById(R.id.servicePriceId);
+
+        if(serviceName.getText().toString().length() == 0
+                ||servicePrice.getText().toString().length() == 0){
+            Snackbar errorMessage = Snackbar.make(view,
+                                "Please fill in both fields to define your service. "
+                                , Snackbar.LENGTH_LONG);
+            errorMessage.show();
+            return;
+        }
+
         String sPrice = servicePrice.getText().toString();
         String[] priceParts = sPrice.split("\\.", 2);
         int price;
-        if(serviceName.getText().toString().length() == 0
-                ||servicePrice.getText().toString().length() == 0){ Snackbar errorMessage = Snackbar.make(view, "Please fill in both fields to define your service. ", Snackbar.LENGTH_LONG);
-            errorMessage.show(); }
         try{
             //checking the price format
             if(priceParts.length == 2)

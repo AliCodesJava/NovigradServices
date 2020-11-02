@@ -99,7 +99,7 @@ public class ModifyService extends AppCompatActivity {
                     && !currentService.getRequiredDocument()
                     .contains(DocumentType.valueOf(inputText.getText().toString()))){
 
-                DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/requiredDocuments");
+                DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/requiredDocument");
                 currentService.addRequiredDoc(DocumentType.valueOf(inputText.getText().toString()));
                 DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
 
@@ -132,12 +132,12 @@ public class ModifyService extends AppCompatActivity {
                     && currentService.getRequiredDocument()
                     .contains(DocumentType.valueOf(inputText.getText().toString()))){
                 DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                        + "/requiredDocuments/");
+                        + "/requiredDocument/");
                 DatabaseHelper.dbr.setValue(null);
                 currentService.removeRequiredDoc(documentTypes[i]);
                 DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                        + "/requiredDocuments/");
-                DatabaseHelper.dbr.setValue(currentService);
+                        + "/requiredDocument/");
+                DatabaseHelper.dbr.setValue(currentService.getRequiredDocument());
 
                 validationMsg = Snackbar.make(inputText,
                         "DocumentType " + inputText.getText().toString() + " deleted",

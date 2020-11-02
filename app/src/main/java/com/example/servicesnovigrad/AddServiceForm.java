@@ -124,7 +124,6 @@ public class AddServiceForm extends AppCompatActivity {
 
         // on vérifie si le service existe, si oui on le supprime
         for(Service currentService : Service.serviceList){
-
             if(currentService.getServiceType().equals(serviceName)){
                 Service.serviceList.remove(currentService);
 

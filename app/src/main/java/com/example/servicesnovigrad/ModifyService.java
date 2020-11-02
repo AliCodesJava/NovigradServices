@@ -32,7 +32,8 @@ public class ModifyService extends AppCompatActivity {
         selectedServiceStatus = findViewById(R.id.selectedServiceTextView);
 
         Spinner documentSpinner = findViewById(R.id.requiredDocumentSpinner);
-        documentSpinner.setAdapter(new ArrayAdapter<DocumentType>(this, android.R.layout.simple_spinner_item, DocumentType.values()));
+        documentSpinner.setAdapter(new ArrayAdapter<DocumentType>(this,
+                                   android.R.layout.simple_spinner_item, DocumentType.values()));
     }
 
     public void selectService(View view){
@@ -95,8 +96,8 @@ public class ModifyService extends AppCompatActivity {
 
         for(DocumentType docType : DocumentType.values()){
             if(docType.toString().equals(inputText.getText().toString())
-            && !currentService.getRequiredDocument()
-            .contains(DocumentType.valueOf(inputText.getText().toString()))){
+                    && !currentService.getRequiredDocument()
+                    .contains(DocumentType.valueOf(inputText.getText().toString()))){
 
                 DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType() + "/requiredDocuments");
                 currentService.addRequiredDoc(DocumentType.valueOf(inputText.getText().toString()));
@@ -114,9 +115,8 @@ public class ModifyService extends AppCompatActivity {
 
         validationMsg.show();
 
-        Log.d("lol", "" + currentService.toString());
+        Log.d("lol", "" + currentService.serviceList);
     }
-
     public void removeRequiredDocument(View view){
         if(currentService == null){ return; }
         if(inputText.getText().toString().length() == 0){ return; }
@@ -129,17 +129,15 @@ public class ModifyService extends AppCompatActivity {
         for(int i = 0; i<documentTypes.length; i++){
             Log.d("pls", "yo");
             if(documentTypes[i].toString().equals(inputText.getText().toString())
-             && currentService.getRequiredDocument()
-             .contains(DocumentType.valueOf(inputText.getText().toString()))){
+                    && currentService.getRequiredDocument()
+                    .contains(DocumentType.valueOf(inputText.getText().toString()))){
                 DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
-                        + "/requiredDocuments/" + i);
+                        + "/requiredDocuments/");
                 DatabaseHelper.dbr.setValue(null);
-
-                currentService.removeRequiredDoc(currentService.getRequiredDocument().get(i));
-
-                /*DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/"
-                                        + currentService.getServiceType() + );
-                DatabaseHelper.dbr.child(currentService.getServiceType()).setValue(currentService);*/
+                currentService.removeRequiredDoc(documentTypes[i]);
+                DatabaseHelper.dbr = DatabaseHelper.setToPath("Services/" + currentService.getServiceType()
+                        + "/requiredDocuments/");
+                DatabaseHelper.dbr.setValue(currentService);
 
                 validationMsg = Snackbar.make(inputText,
                         "DocumentType " + inputText.getText().toString() + " deleted",
@@ -151,6 +149,6 @@ public class ModifyService extends AppCompatActivity {
 
         validationMsg.show();
 
-        Log.d("lol", "" + currentService.toString());
+        Log.d("lol", "" + currentService.serviceList);
     }
 }

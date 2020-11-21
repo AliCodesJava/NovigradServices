@@ -20,6 +20,27 @@ public class LoginForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
+
+        /*
+            On cherche la liste meme si l'utilisateur n'est pas login, pour fetch l'info peut importe le role
+            on s'assure que la liste est vide au cas ou la RAM
+            a encore des éléments de stocker durant l'utilisation de l'app
+        */
+        Service.serviceList.clear();
+
+        // on va remplir notre serviceList de tous les services stockés dans la database
+        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
+        DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Service.serviceList.add(child.getValue(Service.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     public void openRegistrationFormOnClick(View view) {
@@ -36,6 +57,7 @@ public class LoginForm extends AppCompatActivity {
                 AdministratorAccount admin;
                 Client client;
                 Employee employee;
+
                 for (DataSnapshot child : dataSnapshot.getChildren()){
                     for (DataSnapshot child2 : child.getChildren()) {
                         if(child.getKey().equals("AdministratorAccount")){
@@ -58,6 +80,7 @@ public class LoginForm extends AppCompatActivity {
                         }
                     }
                 }
+
                 if(user == null){
                     Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                             "Invalid username/password combination, please try again.",
@@ -67,10 +90,15 @@ public class LoginForm extends AppCompatActivity {
                 }
 
                 String role = user.getClass().getName();
-                Intent intent = new Intent(LoginForm.this, Accueil.class);
+                /*
+                 Tous les roles vont utiliser la meme page pour voir les service mais la fonctionaliter dependra du role
+                 */
+                Intent intent = new Intent(LoginForm.this, ModifyService.class);
+
                 if(user instanceof AdministratorAccount){
                     intent = new Intent(LoginForm.this, AdminMenu.class);
                 }
+
                 intent.putExtra(RegisterForm.EXTRA_USERNAME, user.getUsername());
                 intent.putExtra(RegisterForm.EXTRA_ROLE, role.substring(role.lastIndexOf(".") + 1));
                 intent.putExtra("adminAccountObj", user);

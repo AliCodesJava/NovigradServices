@@ -30,26 +30,6 @@ public class AddServiceForm extends AppCompatActivity {
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
         adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
-
-        /*
-            on s'assure que la liste est vide au cas ou la RAM
-            a encore des éléments de stocker durant l'utilisation de l'app
-        */
-        Service.serviceList.clear();
-
-        // on va remplir notre serviceList de tous les services stockés dans la database
-        DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Services");
-        DatabaseHelper.dbr.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Service.serviceList.add(child.getValue(Service.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
     }
 
     public void addService(View view){

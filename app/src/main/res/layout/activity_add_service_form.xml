@@ -70,7 +70,8 @@
             android:onClick="addService"
             android:text="@string/addService"
             android:textColor="#0C2A95"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/addRequiredDocId"

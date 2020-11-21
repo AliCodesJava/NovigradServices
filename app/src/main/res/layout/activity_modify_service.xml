@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_dark"
             android:gravity="center_vertical"
-            android:text="Logged in as @{user.getClass().getName()}"
+            android:text="Logged in as @{user.getUsername()}"
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp" />

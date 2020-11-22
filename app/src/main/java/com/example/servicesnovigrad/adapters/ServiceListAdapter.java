@@ -19,7 +19,6 @@ import com.example.servicesnovigrad.listeners.BtnClickListener;
 import java.util.ArrayList;
 
 public class ServiceListAdapter extends ArrayAdapter<Service> {
-
     private static class ViewHolder {
         private TextView serviceName;
         private Button serviceApplyBtn;

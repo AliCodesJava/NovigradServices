@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_weight="0"
+            android:onClick="manageBranch"
             android:text="@string/manageBranch"
             android:textColor="#0C2A95"
             android:textSize="24sp" />

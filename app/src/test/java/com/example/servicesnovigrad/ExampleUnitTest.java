@@ -59,5 +59,23 @@ public class ExampleUnitTest {
         assertEquals(DocumentType.PHOTO, service.getRequiredDocument().get(0));
         assertEquals(DocumentType.PREUVE_DE_DOMICILE, service.getRequiredDocument().get(1));
     }
+    @Test
+    public void testServiceAddThreeRequiredDocuments() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredDoc(DocumentType.PHOTO);
+        service.addRequiredDoc(DocumentType.PREUVE_DE_DOMICILE);
+        service.addRequiredDoc(DocumentType.PREUVE_DE_STATUS);
+        assertEquals(DocumentType.PHOTO, service.getRequiredDocument().get(0));
+        assertEquals(DocumentType.PREUVE_DE_DOMICILE, service.getRequiredDocument().get(1));
+        assertEquals(DocumentType.PREUVE_DE_STATUS, service.getRequiredDocument().get(2));
+    }
+    @Test
+    public void testServiceAddTwoRemoveFirstRequiredDocumentType() {
+        Service service = new Service("Jaune attend!", 23);
+        service.addRequiredDoc(DocumentType.PHOTO);
+        service.addRequiredDoc(DocumentType.PREUVE_DE_DOMICILE);
+        service.removeRequiredDoc(DocumentType.PHOTO);
+        assertEquals(DocumentType.PREUVE_DE_DOMICILE, service.getRequiredDocument().get(0));
+    }
 
 }

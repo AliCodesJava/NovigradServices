@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class ServiceApplication {
     public static ArrayList<ServiceApplication> applications = new ArrayList<>();
     private Service service;
-
-
-
     private Client applicant;
     public ServiceApplication(Client applicant, Service service) {
         this.service = service;

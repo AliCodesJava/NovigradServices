@@ -3,11 +3,11 @@ package com.example.servicesnovigrad;
 public class Address {
     private String streetNumber; // can contain letters, so kept it as a String
     private String streetName;
-    private short apartmentNumber;
+    private int apartmentNumber;
     private String city;
     private String postalCode;
 
-    public Address(String streetNumber, short apartmentNumber, String streetName,
+    public Address(String streetNumber, int apartmentNumber, String streetName,
                    String city, String postalCode) {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
@@ -19,7 +19,7 @@ public class Address {
     public String getStreetNumber() {
         return streetNumber;
     }
-    public short getApartmentNumber() {
+    public int getApartmentNumber() {
         return apartmentNumber;
     }
     public String getStreetName() {
@@ -33,7 +33,7 @@ public class Address {
     }
 
     public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
-    public void setApartmentNumber(short apartmentNumber) { this.apartmentNumber = apartmentNumber; }
+    public void setApartmentNumber(int apartmentNumber) { this.apartmentNumber = apartmentNumber; }
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }

@@ -41,7 +41,10 @@ public class Employee extends Person{
         private Address address;
         private WeeklySchedule schedule;
 
-        public Branch(){}
+        public Branch(){
+            this.address = null;
+            this.schedule = null;
+        }
         public Branch(Address address, WeeklySchedule schedule) {
             this.address = address;
             this.schedule = schedule;
@@ -51,6 +54,7 @@ public class Employee extends Person{
         public WeeklySchedule getSchedule() { return schedule; }
 
         public void setAddress(Address address) { this.address = address; }
+        public void setSchedule(Address address) { this.schedule = schedule; }
 
         public boolean isOpen(DayOfWeek day, short time/*from 0:00*/){
             for (Pair<Short, Short> p:

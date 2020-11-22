@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -54,13 +55,13 @@ public class ActivityBranch extends AppCompatActivity {
             user.resetBranch();
 
             Address branchAddress = new Address(streetNum.getText().toString(),
-                    Short.parseShort(appNum.getText().toString()), streetName.getText().toString(),
+                    Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
                     city.getText().toString(), postalCode.getText().toString());
             user.setMainBranchAddress(branchAddress);
 
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
             DatabaseHelper.dbr.child(streetNum.getText().toString() + " " + streetName.getText().toString())
-                                    .setValue(user.getMainBranch());
+                            .setValue(user.getMainBranch());
         }
     }
 

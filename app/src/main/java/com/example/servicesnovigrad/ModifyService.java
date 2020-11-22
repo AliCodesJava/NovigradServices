@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,6 @@ public class ModifyService extends AppCompatActivity {
     private Spinner documentTypeSpinner;
 
     private String clientUserName;
-    private String clientUserRole;
 
     private ListView listView;
     private ArrayAdapter adapter;
@@ -59,10 +59,10 @@ public class ModifyService extends AppCompatActivity {
 
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
-        currentUser = (User)intent.getSerializableExtra("adminAccountObj");
+        currentUser = (User)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
 
-        clientUserName = intent.getStringExtra(RegisterForm.EXTRA_USERNAME);
-        clientUserRole = intent.getStringExtra(RegisterForm.EXTRA_ROLE);
+        clientUserName = currentUser.getUsername();
+
         //clientUser = new Client("donald", "password", "d@t.ca", "Donald", "Trump");
 
         listView = (ListView) findViewById(R.id.lstView_services);
@@ -71,14 +71,17 @@ public class ModifyService extends AppCompatActivity {
         clientTypeTxtView = (TextView)findViewById(R.id.txtView_account_type) ;
 
         welcomeMessagetxtView.setText(String.format("Hi %s, welcome to Service Novigrad", (clientUserName == null ? "administrator" : clientUserName)));
-        clientTypeTxtView.setText(String.format("Logged in as %s", clientUserRole));
+        String userType = currentUser.getClass().toString();
+        clientTypeTxtView.setText(String.format("Logged in as %s", userType.substring(userType.lastIndexOf(".") + 1)));
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         final LayoutInflater inflater = this.getLayoutInflater();
-        if(clientUserRole.equals("Employee")){
-            new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), "Serviceux");
-            new ServiceApplication(new Client("donald1", "password", "d@t.ca", "Donald", "Trump"), "Service22ux");
-            new ServiceApplication(new Client("donald2", "password", "d@t.ca", "Donald", "Trump"), "Serviceu33x");
+        if(currentUser instanceof Employee){
+            {   //TEMPORARY, FOR TESTING PURPOSES TODO Remove when client can apply
+                new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), "Serviceux");
+                new ServiceApplication(new Client("donald1", "password", "d@t.ca", "Donald", "Trump"), "Service22ux");
+                new ServiceApplication(new Client("donald2", "password", "d@t.ca", "Donald", "Trump"), "Serviceu33x");
+            }
             adapter = new ApplicationListAdapter(
                     this,
                     ServiceApplication.applications,
@@ -115,8 +118,24 @@ public class ModifyService extends AppCompatActivity {
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            //todo create an activity for viewing an application, and show it on btn click
+                            String serviceName = ServiceApplication.applications.get(position).getServiceName();
+                            String applicantFirstName = ServiceApplication.applications.get(position).getApplicant().getFirstName();
+                            String applicantLastName = ServiceApplication.applications.get(position).getApplicant().getLastName();
+                            String applicantEmail = ServiceApplication.applications.get(position).getApplicant().getEmailAddress();
 
+                            final View userDialogView = inflater.inflate(R.layout.application_view, null);
+                            dialog.setTitle("Application:");
+                            dialog.setView(userDialogView);
+                            ((TextView)userDialogView.findViewById(R.id.service_name)).setText("Service: " + serviceName);
+                            ((TextView)userDialogView.findViewById(R.id.applicant_name)).setText("Applicant: " + applicantFirstName + " " + applicantLastName);
+                            ((TextView)userDialogView.findViewById(R.id.applicant_email)).setText("Email: " + applicantEmail);
+                            dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
                         }
                     }
             );

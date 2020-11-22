@@ -3,8 +3,9 @@ package com.example.servicesnovigrad;
 import java.util.ArrayList;
 
 public class ServiceApplication {
-    public static ArrayList<ServiceApplication> applications = new ArrayList<ServiceApplication>();
+    public static ArrayList<ServiceApplication> applications = new ArrayList<>();
     private String serviceName;
+
 
 
     private Client applicant;

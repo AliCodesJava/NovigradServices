@@ -12,8 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterForm extends AppCompatActivity {
-    public static String EXTRA_USERNAME = "com.example.servicesnovigrad.EXTRA_USERNAME";
-    public static String EXTRA_ROLE = "com.example.servicesnovigrad.EXTRA_ROLE";
+    public static String EXTRA_USER = "com.example.servicesnovigrad.EXTRA_USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +86,7 @@ public class RegisterForm extends AppCompatActivity {
         DatabaseHelper.dbr.child(user.getUsername()).setValue(user);
 
         Intent intent = new Intent(this, LoginForm.class);
-        intent.putExtra(EXTRA_USERNAME, user.getUsername());
-        String role = user.getClass().getName();
-        intent.putExtra(EXTRA_ROLE, role.substring(role.lastIndexOf(".") + 1));
+        intent.putExtra(RegisterForm.EXTRA_USER, user);
         startActivity(intent);
     }
 }

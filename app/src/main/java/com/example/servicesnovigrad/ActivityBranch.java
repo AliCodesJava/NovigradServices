@@ -53,7 +53,7 @@ public class ActivityBranch extends AppCompatActivity {
            postalCode.getText().toString().length() == 0
         ){
             statusMsg = Snackbar.make(findViewById(android.R.id.content),
-                    "Invalid username/password combination, please try again.",
+                    "Some or all fields may be invalid, please try again.",
                     Snackbar.LENGTH_LONG);
         }
         else if(user.getMainBranch() == null){
@@ -63,20 +63,10 @@ public class ActivityBranch extends AppCompatActivity {
                     Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
                     city.getText().toString(), postalCode.getText().toString());
             user.getMainBranch().setAddress(branchAddress);
-            user.getMainBranch().setSchedule(new WeeklySchedule());
-            user.getMainBranch().getSchedule().addOpenHours(DayOfWeek.FRIDAY, 0, 300);
             user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
 
-<<<<<<< HEAD
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
             DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
-=======
-        Address branchAddress = new Address(streetNum.getText().toString(),
-                Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
-                city.getText().toString(), postalCode.getText().toString());
-        user.getMainBranch().setAddress(branchAddress);
-        user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
->>>>>>> c825d984b01bcf536a1e55cd007f787139eb89e7
 
             statusMsg = Snackbar.make(findViewById(android.R.id.content),
                     "Created Main Branch with given address",

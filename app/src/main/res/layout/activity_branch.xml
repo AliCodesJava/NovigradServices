@@ -25,40 +25,55 @@
             android:textColor="@android:color/background_dark"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/appNumber"
+        <EditText
+            android:id="@+id/appNum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
-            android:hint="Appartment Number" />
+            android:ems="10"
+            android:hint="Appartment Number"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
-        <TextView
-            android:id="@+id/streetNumber"
+        <EditText
+            android:id="@+id/streetNum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
-            android:hint="Street Number" />
+            android:ems="10"
+            android:hint="Street Number"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
-        <TextView
+        <EditText
             android:id="@+id/streetName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
-            android:hint="Street Name" />
+            android:ems="10"
+            android:hint="Street Name"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
-        <TextView
+        <EditText
             android:id="@+id/postalCode"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
-            android:hint="Postal Code" />
+            android:ems="10"
+            android:hint="Postal Code"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
-        <TextView
+        <EditText
             android:id="@+id/city"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="10dp"
-            android:hint="City" />
+            android:ems="10"
+            android:hint="City"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/submitId"
@@ -70,7 +85,7 @@
             android:textColor="#0C2A95" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -100,12 +115,12 @@
             android:textColor="#0C2A95" />
 
         <EditText
-            android:id="@+id/status"
+            android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
-            android:layout_height="21dp"
+            android:layout_height="23dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Status : no service selected" />
+            android:text="Status : no " />
 
         <TextView
             android:id="@+id/searchService"

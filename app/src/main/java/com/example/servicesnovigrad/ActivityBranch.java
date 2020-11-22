@@ -67,8 +67,16 @@ public class ActivityBranch extends AppCompatActivity {
             user.getMainBranch().getSchedule().addOpenHours(DayOfWeek.FRIDAY, 0, 300);
             user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
 
+<<<<<<< HEAD
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
             DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+=======
+        Address branchAddress = new Address(streetNum.getText().toString(),
+                Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
+                city.getText().toString(), postalCode.getText().toString());
+        user.getMainBranch().setAddress(branchAddress);
+        user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
+>>>>>>> c825d984b01bcf536a1e55cd007f787139eb89e7
 
             statusMsg = Snackbar.make(findViewById(android.R.id.content),
                     "Created Main Branch with given address",
@@ -81,5 +89,18 @@ public class ActivityBranch extends AppCompatActivity {
         }
 
         statusMsg.show();
+    }
+    public void addSchedule(View view){
+        EditText time1 = findViewById(R.id.editTextTime);
+        EditText time2 = findViewById(R.id.editTextTime2);
+        Spinner spin = findViewById(R.id.spinnerId);
+        user.getMainBranch().getSchedule().addOpenHours(
+                (DayOfWeek) spin.getSelectedItem(),(Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
+                                                + Integer.parseInt(""+time1.getText().charAt(3)+time1.getText().charAt(4)) ,
+                                (Integer.parseInt(""+time2.getText().charAt(0)+time2.getText().charAt(1))) * 60
+                                                + Integer.parseInt(""+time2.getText().charAt(3)+time2.getText().charAt(4)));
+
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
     }
 }

@@ -31,7 +31,7 @@
             android:background="@color/common_google_signin_btn_text_dark_default"
             android:paddingHorizontal="20sp"
             android:paddingVertical="5sp"
-            android:text="Hi @{user.firstName}, welcome to Service Novigrad"
+            android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_dark"
             android:textSize="24sp" />
@@ -54,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20sp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Search" />
+            android:hint="Search"
+            android:inputType="textPersonName" />
 
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_dark"
             android:gravity="center_vertical"
-            android:text="Logged in as @{user.getUsername()}"
+            android:text="Logged in as @{user.getClass().getName()}"
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp" />

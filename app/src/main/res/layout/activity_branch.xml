@@ -23,13 +23,13 @@
             android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_dark"
-            android:textSize="24sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/appNum"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Appartment Number"
             android:inputType="textPersonName"
@@ -38,8 +38,8 @@
         <EditText
             android:id="@+id/streetNum"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Street Number"
             android:inputType="textPersonName"
@@ -48,8 +48,8 @@
         <EditText
             android:id="@+id/streetName"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Street Name"
             android:inputType="textPersonName"
@@ -58,8 +58,8 @@
         <EditText
             android:id="@+id/postalCode"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Postal Code"
             android:inputType="textPersonName"
@@ -68,8 +68,8 @@
         <EditText
             android:id="@+id/city"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="City"
             android:inputType="textPersonName"
@@ -89,21 +89,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:inputType="number"
-            android:id="@+id/openHoursId"
+        <EditText
+            android:id="@+id/openHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Open Hours" />
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Open hours"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
-        <TextView
-            android:inputType="number"
+        <EditText
             android:id="@+id/closingHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Closing Hours" />
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Closing hours"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/addHoursId"
@@ -114,29 +118,19 @@
             android:text="Add to Schedule"
             android:textColor="#0C2A95" />
 
+        <TextView
+            android:id="@+id/serviceSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Service status :" />
+
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/serviceInput"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Status : no " />
-
-        <TextView
-            android:id="@+id/searchService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Service field" />
-
-        <TextView
-            android:id="@+id/searchServiceBranch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="Search Service"
-            android:textColor="#0C2A95" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/addService"

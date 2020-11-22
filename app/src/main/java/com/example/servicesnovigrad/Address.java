@@ -1,12 +1,14 @@
 package com.example.servicesnovigrad;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     private String streetNumber; // can contain letters, so kept it as a String
     private String streetName;
     private int apartmentNumber;
     private String city;
     private String postalCode;
-
+    public Address(){}
     public Address(String streetNumber, int apartmentNumber, String streetName,
                    String city, String postalCode) {
         this.streetNumber = streetNumber;

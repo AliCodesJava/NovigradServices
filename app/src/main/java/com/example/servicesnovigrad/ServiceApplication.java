@@ -3,6 +3,7 @@ package com.example.servicesnovigrad;
 import java.util.ArrayList;
 
 public class ServiceApplication {
+    //todo make application lists in branch, not here
     public static ArrayList<ServiceApplication> applications = new ArrayList<>();
     private Service service;
     private Client applicant;

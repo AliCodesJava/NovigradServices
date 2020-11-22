@@ -2,9 +2,11 @@ package com.example.servicesnovigrad;
 
 import androidx.core.util.Pair;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 
-public class Employee extends Person{
+public class Employee extends Person implements Serializable {
     private String employeeID;
     private Branch mainBranch;
 
@@ -28,41 +30,7 @@ public class Employee extends Person{
     public void setMainBranch(Branch mainBranch) {
         this.mainBranch = mainBranch;
     }
-
-    public void setMainBranchAddress(Address address){
-        this.mainBranch.setAddress(address);
-    }
     public void resetBranch(){
         mainBranch = new Branch();
-    }
-
-
-    public class Branch {
-        private Address address;
-        private WeeklySchedule schedule;
-
-        public Branch(){
-            this.address = null;
-            this.schedule = null;
-        }
-        public Branch(Address address, WeeklySchedule schedule) {
-            this.address = address;
-            this.schedule = schedule;
-        }
-
-        public Address getAddress() { return address; }
-        public WeeklySchedule getSchedule() { return schedule; }
-
-        public void setAddress(Address address) { this.address = address; }
-        public void setSchedule(Address address) { this.schedule = schedule; }
-
-        public boolean isOpen(DayOfWeek day, int time/*from 0:00*/){
-            for (Pair<Integer, Integer> p:
-                    schedule.getOpenHours(day)) {
-                if(time>=p.first && time<=p.second)
-                    return true;
-            }
-            return false;
-        }
     }
 }

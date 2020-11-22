@@ -11,7 +11,7 @@ public class WeeklySchedule {
     private EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> openHours;
 
     public WeeklySchedule() {
-        openHours = new EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>>(DayOfWeek.class);
+        openHours = new EnumMap<>(DayOfWeek.class);
     }
 
     public ArrayList<Pair<Integer, Integer>> getOpenHours(DayOfWeek day) {
@@ -21,6 +21,9 @@ public class WeeklySchedule {
     }
     public EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> getOpenHours() {
         return openHours;
+    }
+    public void setOpenHours(EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> openHours){
+        this.openHours = openHours;
     }
 
     /*

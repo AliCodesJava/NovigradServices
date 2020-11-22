@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 
 public class ActivityBranch extends AppCompatActivity {
     Employee user = null;
@@ -51,16 +52,16 @@ public class ActivityBranch extends AppCompatActivity {
            postalCode.getText().toString().length() == 0
         ){ return; }
 
-        if(user.getMainBranch() == null){
-            user.resetBranch();
+        user.resetBranch();
 
-            Address branchAddress = new Address(streetNum.getText().toString(),
-                    Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
-                    city.getText().toString(), postalCode.getText().toString());
-            user.setMainBranchAddress(branchAddress);
+        Address branchAddress = new Address(streetNum.getText().toString(),
+                Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
+                city.getText().toString(), postalCode.getText().toString());
+        user.getMainBranch().setAddress(branchAddress);
+        user.getMainBranch().setSchedule(new WeeklySchedule());
+        user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
 
-            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
-            DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
-        }
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
     }
 }

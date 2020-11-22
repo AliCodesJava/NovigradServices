@@ -29,11 +29,19 @@ public class Employee extends Person{
         this.mainBranch = mainBranch;
     }
 
+    public void setMainBranchAddress(Address address){
+        this.mainBranch.setAddress(address);
+    }
+    public void resetBranch(){
+        mainBranch = new Branch();
+    }
 
-    private class Branch {
+
+    public class Branch {
         private Address address;
         private WeeklySchedule schedule;
 
+        public Branch(){}
         public Branch(Address address, WeeklySchedule schedule) {
             this.address = address;
             this.schedule = schedule;
@@ -42,9 +50,7 @@ public class Employee extends Person{
         public Address getAddress() { return address; }
         public WeeklySchedule getSchedule() { return schedule; }
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
+        public void setAddress(Address address) { this.address = address; }
 
         public boolean isOpen(DayOfWeek day, short time/*from 0:00*/){
             for (Pair<Short, Short> p:

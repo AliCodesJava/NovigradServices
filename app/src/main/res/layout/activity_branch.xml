@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-86dp">
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/welcome"
@@ -32,7 +32,7 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Appartment Number"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="#000" />
 
         <EditText
@@ -81,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
+            android:onClick="submitBranch"
             android:text="ASSOCIATE ACCOUNT TO BRANCH"
             android:textColor="#0C2A95" />
 
@@ -96,7 +97,7 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Open hours"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="#000" />
 
         <EditText
@@ -106,7 +107,7 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="Closing hours"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="#000" />
 
         <TextView
@@ -125,12 +126,10 @@
             android:layout_marginTop="10dp"
             android:text="Service status :" />
 
-        <EditText
-            android:id="@+id/serviceInput"
+        <Spinner
+            android:id="@+id/spinnerId2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/addService"

@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.servicesnovigrad.adapters.ServiceListAdapter;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.time.DayOfWeek;
 
 public class ActivityBranch extends AppCompatActivity {
@@ -24,25 +28,43 @@ public class ActivityBranch extends AppCompatActivity {
         intent = getIntent();
         user = (Employee)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerId);
-        spinner.setAdapter(new ArrayAdapter<DayOfWeek>(this, android.R.layout.simple_spinner_item, DayOfWeek.values()));
+        Spinner spinnerDay = (Spinner)findViewById(R.id.spinnerId);
+        spinnerDay.setAdapter(new ArrayAdapter<DayOfWeek>(this,
+                android.R.layout.simple_spinner_item, DayOfWeek.values()));
+        Spinner serviceSpinner = (Spinner)findViewById(R.id.spinnerId2);
+        serviceSpinner.setAdapter(new ArrayAdapter<Service>(this,
+                android.R.layout.simple_spinner_item, Service.serviceList));
     }
 
-    public void submit(View view) {
-        /*EditText appNum = findViewById(R.id.appNumber);
-        EditText streetNum = findViewById(R.id.streetNumber);
+    public void submitBranch(View view) {
+        EditText streetNum = findViewById(R.id.streetNum);
+        EditText appNum = findViewById(R.id.appNum);
         EditText streetName = findViewById(R.id.streetName);
-        EditText postalCode = findViewById(R.id.postalCode);
         EditText city = findViewById(R.id.city);
-        EditText openHrs = findViewById(R.id.openHoursId);
-        EditText closingHrs = findViewById(R.id.closingHours);*/
+        EditText postalCode = findViewById(R.id.postalCode);
 
-        /*Address branchAddress = new Address(streetNum,
+        if(streetNum.getText().toString().length() == 0 ||
+           appNum.getText().toString().length() == 0 ||
+           streetName.getText().toString().length() == 0 ||
+           city.getText().toString().length() == 0 ||
+           postalCode.getText().toString().length() == 0
+        ){ return; }
+
+        if(user.getMainBranch() == null){
+            user.resetBranch();
+
+            Address branchAddress = new Address(streetNum.getText().toString(),
                     Short.parseShort(appNum.getText().toString()), streetName.getText().toString(),
-                    city.getText().toString(), postalCode.getText().toString());*/
+                    city.getText().toString(), postalCode.getText().toString());
+            user.setMainBranchAddress(branchAddress);
 
-
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+            DatabaseHelper.dbr.child(streetNum.getText().toString() + " " + streetName.getText().toString())
+                                    .setValue(user.getMainBranch());
+        }
     }
+
+
 }
 
 

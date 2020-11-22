@@ -22,7 +22,8 @@ public class ManageClients extends AppCompatActivity {
         if(!textView.getText().toString().equals("")){
             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients")
                                 .child(textView.getText().toString());
-            DatabaseHelper.dbr.setValue(null);}
+            DatabaseHelper.dbr.setValue(null);
+        }
         else{
             Snackbar problemBar = Snackbar.make(view, "Please enter the username of the user to delete ", Snackbar.LENGTH_LONG);
             problemBar.show();

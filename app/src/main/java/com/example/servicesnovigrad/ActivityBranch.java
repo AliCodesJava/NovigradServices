@@ -60,13 +60,7 @@ public class ActivityBranch extends AppCompatActivity {
             user.setMainBranchAddress(branchAddress);
 
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
-            DatabaseHelper.dbr.child(streetNum.getText().toString() + " " + streetName.getText().toString())
-                            .setValue(user.getMainBranch());
+            DatabaseHelper.dbr.child("Main Branch").setValue(user.getMainBranch());
         }
     }
-
-
 }
-
-
-

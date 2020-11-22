@@ -56,8 +56,8 @@ public class Employee extends Person{
         public void setAddress(Address address) { this.address = address; }
         public void setSchedule(Address address) { this.schedule = schedule; }
 
-        public boolean isOpen(DayOfWeek day, short time/*from 0:00*/){
-            for (Pair<Short, Short> p:
+        public boolean isOpen(DayOfWeek day, int time/*from 0:00*/){
+            for (Pair<Integer, Integer> p:
                     schedule.getOpenHours(day)) {
                 if(time>=p.first && time<=p.second)
                     return true;

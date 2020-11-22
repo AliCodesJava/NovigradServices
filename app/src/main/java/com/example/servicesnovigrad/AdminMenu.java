@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class AdminMenu extends AppCompatActivity {
-    private User adminAcc = null;
+    private User adminAcc;
     private Intent intent = null;
 
     @Override

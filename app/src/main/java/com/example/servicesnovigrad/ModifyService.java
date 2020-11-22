@@ -246,7 +246,6 @@ public class ModifyService extends AppCompatActivity {
     }
 
     public void changeServicePrice(Service service, String newServicePrice)throws Exception{
-        View view = (View)findViewById(R.id.edtTxt_service_price);
         String[] priceParts = newServicePrice.split("\\.");
         int newPrice;
         try{
@@ -268,8 +267,7 @@ public class ModifyService extends AppCompatActivity {
             throw new Exception("Please make sure your price is in the right format! (ex: 123.45)");
         }
         catch (Exception e){
-            Snackbar errorMessage = Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG);
-            errorMessage.show();
+            throw new Exception(e.getMessage());
         }
     }
 

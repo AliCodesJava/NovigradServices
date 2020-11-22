@@ -94,13 +94,18 @@ public class ActivityBranch extends AppCompatActivity {
         EditText time1 = findViewById(R.id.editTextTime);
         EditText time2 = findViewById(R.id.editTextTime2);
         Spinner spin = findViewById(R.id.spinnerId);
-        user.getMainBranch().getSchedule().addOpenHours(
-                (DayOfWeek) spin.getSelectedItem(),(Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
-                                                + Integer.parseInt(""+time1.getText().charAt(3)+time1.getText().charAt(4)) ,
-                                (Integer.parseInt(""+time2.getText().charAt(0)+time2.getText().charAt(1))) * 60
-                                                + Integer.parseInt(""+time2.getText().charAt(3)+time2.getText().charAt(4)));
+        try{
+            user.getMainBranch().getSchedule().addOpenHours(
+                    (DayOfWeek) spin.getSelectedItem(),(Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
+                            + Integer.parseInt(""+time1.getText().charAt(3)+time1.getText().charAt(4)) ,
+                    (Integer.parseInt(""+time2.getText().charAt(0)+time2.getText().charAt(1))) * 60
+                            + Integer.parseInt(""+time2.getText().charAt(3)+time2.getText().charAt(4)));
 
-        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
-        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+            DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+        }
+        catch (Exception e){
+            Snackbar.make(view, "Please make sure your times are in the right format. Ex: 02:32", Snackbar.LENGTH_LONG).show();
+        }
     }
 }

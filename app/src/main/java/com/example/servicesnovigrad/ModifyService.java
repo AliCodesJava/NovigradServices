@@ -114,7 +114,11 @@ public class ModifyService extends AppCompatActivity {
                             /*
                              **************************** DELETE FROM DATABASE ALSO *******************
                              */
-
+                            try {
+                                AddServiceForm.removeService(serviceName);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             Service.serviceList.remove(position);
                             userMessageTxtView.setVisibility(View.VISIBLE);
                             userMessageTxtView.setText("The service " + serviceName + " has been removed.");

@@ -99,6 +99,7 @@ public class AddServiceForm extends AppCompatActivity {
             errorMessage.show();
         }
     }
+
     public static Service removeService(String serviceName) throws Exception {
         if(serviceName.length() == 0){ throw new Exception("Please write the name of the service you wish to remove. "); }
 

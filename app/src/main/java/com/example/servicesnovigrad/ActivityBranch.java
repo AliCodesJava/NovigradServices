@@ -59,6 +59,7 @@ public class ActivityBranch extends AppCompatActivity {
                 city.getText().toString(), postalCode.getText().toString());
         user.getMainBranch().setAddress(branchAddress);
         user.getMainBranch().setSchedule(new WeeklySchedule());
+        user.getMainBranch().getSchedule().addOpenHours(DayOfWeek.FRIDAY, 0, 300);
         user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
 
         DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());

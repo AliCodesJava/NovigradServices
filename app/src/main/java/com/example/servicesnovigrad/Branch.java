@@ -1,6 +1,5 @@
 package com.example.servicesnovigrad;
 
-import androidx.core.util.Pair;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;
@@ -37,7 +36,7 @@ public class Branch implements Serializable {
     public boolean isOpen(DayOfWeek day, int time/*from 0:00*/){
         for (Pair<Integer, Integer> p:
                 schedule.getOpenHours(day)) {
-            if(time>=p.first && time<=p.second)
+            if(time>=p.getFirst() && time<=p.getSecond())
                 return true;
         }
         return false;

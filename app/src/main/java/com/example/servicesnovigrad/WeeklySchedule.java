@@ -1,28 +1,28 @@
 package com.example.servicesnovigrad;
 
-import androidx.core.util.Pair;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.EnumMap;
+import java.util.HashMap;
 
-public class WeeklySchedule {
-    private EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> openHours;
+public class WeeklySchedule implements Serializable {
+    private HashMap<String, ArrayList<Pair<Integer, Integer>>> openHours;
 
     public WeeklySchedule() {
-        openHours = new EnumMap<>(DayOfWeek.class);
+        openHours = new HashMap();
     }
 
     public ArrayList<Pair<Integer, Integer>> getOpenHours(DayOfWeek day) {
-        if (!openHours.containsKey(day))
-            openHours.put(day, new ArrayList<Pair<Integer, Integer>>());
-        return openHours.get(day);
+        if (!openHours.containsKey(day.toString()))
+            openHours.put(day.toString(), new ArrayList<Pair<Integer, Integer>>());
+        return openHours.get(day.toString());
     }
-    public EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> getOpenHours() {
+    public HashMap<String, ArrayList<Pair<Integer, Integer>>> getOpenHours() {
         return openHours;
     }
-    public void setOpenHours(EnumMap<DayOfWeek, ArrayList<Pair<Integer, Integer>>> openHours){
+    public void setOpenHours(HashMap<String, ArrayList<Pair<Integer, Integer>>> openHours){
         this.openHours = openHours;
     }
 
@@ -36,9 +36,9 @@ public class WeeklySchedule {
         if (openingTime >= 60 * 24) openingTime = 60 * 24 - 1;
         if (closingTime >= 60 * 24) closingTime = 60 * 24 - 1;
 
-        if (!openHours.containsKey(day))
-            openHours.put(day, new ArrayList<Pair<Integer, Integer>>());
-        openHours.get(day).add(new Pair<Integer, Integer>(openingTime, closingTime));
+        if (!openHours.containsKey(day.toString()))
+            openHours.put(day.toString(), new ArrayList<Pair<Integer, Integer>>());
+        openHours.get(day.toString()).add(new Pair<Integer, Integer>(openingTime, closingTime));
     }
     /*
         Removes the pair of openingTime, closingTime of index
@@ -47,10 +47,10 @@ public class WeeklySchedule {
     public Pair<Integer, Integer> removeOpenHours(DayOfWeek day, int index){
         if(index<0)
             throw new NullPointerException("Cannot access this position: " + index);
-        if (!openHours.containsKey(day) || openHours.get(day).size()<=index)
+        if (!openHours.containsKey(day.toString()) || openHours.get(day.toString()).size()<=index)
             throw new InvalidParameterException("This day does not contain any scheduled openHours");
         else
-            return openHours.get(day).remove(index);
+            return openHours.get(day.toString()).remove(index);
     }
 
     @Override
@@ -59,11 +59,11 @@ public class WeeklySchedule {
         for (DayOfWeek day:
              DayOfWeek.values()) {
             s += day + "/n";
-            if (openHours.containsKey(day))
+            if (openHours.containsKey(day.toString()))
             for (Pair<Integer, Integer> p:
-            openHours.get(day)) {
-                s += " from " + p.first/60 + ":" + p.first%60;
-                s += " to " + p.second/60 + ":" + p.second%60 + "/n";
+            openHours.get(day.toString())) {
+                s += " from " + p.getFirst()/60 + ":" + p.getFirst()%60;
+                s += " to " + p.getSecond()/60 + ":" + p.getSecond()%60 + "/n";
             }
         }
         return s;

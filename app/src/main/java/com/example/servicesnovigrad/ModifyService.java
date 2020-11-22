@@ -265,7 +265,6 @@ public class ModifyService extends AppCompatActivity {
     }
 
     public ListView getDocuments(Service service){
-
         final ListView requiredDocs = new ListView(this);
 
         try{

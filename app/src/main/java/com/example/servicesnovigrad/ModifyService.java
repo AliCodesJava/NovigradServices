@@ -75,7 +75,6 @@ public class ModifyService extends AppCompatActivity {
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         final LayoutInflater inflater = this.getLayoutInflater();
-
         if(Service.serviceList.size() == 0){
             userMessageTxtView.setVisibility(View.VISIBLE);
             userMessageTxtView.setTextColor(Color.BLACK);
@@ -146,15 +145,22 @@ public class ModifyService extends AppCompatActivity {
                             editNameText.setText(currentService.getServiceType());
                             final EditText editPriceText = (EditText) userDialogView.findViewById(R.id
                                     .edtTxt_service_price);
-                            editPriceText.setText(Integer.toString(currentService.getServicePrice()));
+                            editPriceText.setText(currentService.getPriceString());
 
                             dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    changeService(currentService, editNameText.getText().toString(), editPriceText.getText().toString());
                                     userMessageTxtView.setVisibility(View.VISIBLE);
-                                    userMessageTxtView.setText("The service " + currentService.getServiceType() + " has been edited.");
-                                    userMessageTxtView.setTextColor(Color.GREEN);
+                                    try{
+                                        changeService(currentService, editNameText.getText().toString(), editPriceText.getText().toString());
+                                        userMessageTxtView.setText("The service " + currentService.getServiceType() + " has been edited.");
+                                        userMessageTxtView.setTextColor(Color.GREEN);
+                                    }
+                                    catch (Exception e){
+                                        userMessageTxtView.setText("The service " + currentService.getServiceType() + " has not been edited.");
+                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        userMessageTxtView.setTextColor(Color.RED);
+                                    }
                                     userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                                 }
                             });
@@ -214,11 +220,11 @@ public class ModifyService extends AppCompatActivity {
          */
     }
 
-    public void changeService(Service service, String newName, String newPrice){
+    public void changeService(Service service, String newName, String newPrice)throws Exception{
         if(service == null){ return; }
         changeServiceName(service, newName);
         changeServicePrice(service, newPrice);
-        Toast.makeText(getApplicationContext(), "This service has successfully been added to the database.",
+        Toast.makeText(getApplicationContext(), "This service has successfully been changed in the database.",
                 Toast.LENGTH_SHORT).show();
         servicesAdapter.notifyDataSetChanged();
     }
@@ -239,10 +245,10 @@ public class ModifyService extends AppCompatActivity {
         servicesAdapter.notifyDataSetChanged();
     }
 
-    public void changeServicePrice(Service service, String newServicePrice){
+    public void changeServicePrice(Service service, String newServicePrice)throws Exception{
         View view = (View)findViewById(R.id.edtTxt_service_price);
-        String[] priceParts = newServicePrice.split("\\.", 2);
-        int newPrice = 0;
+        String[] priceParts = newServicePrice.split("\\.");
+        int newPrice;
         try{
             //checking the price format
             if(priceParts.length == 2)
@@ -259,8 +265,7 @@ public class ModifyService extends AppCompatActivity {
             service.setServicePrice(newPrice);
         }
         catch (NumberFormatException e){
-            Toast.makeText(getApplicationContext(), "Please make sure your price is in the right format!",
-                    Toast.LENGTH_LONG).show();
+            throw new Exception("Please make sure your price is in the right format! (ex: 123.45)");
         }
         catch (Exception e){
             Snackbar errorMessage = Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG);

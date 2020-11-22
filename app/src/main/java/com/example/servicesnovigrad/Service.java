@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Service {
     public static ArrayList<Service> serviceList = new ArrayList();
     private String serviceType;
-    private int servicePrice;
+    private int servicePrice; // as number of cents
     private ArrayList<DocumentType> requiredDocument;
     private ArrayList<String> requiredInformation;
 
@@ -26,6 +26,9 @@ public class Service {
         this.servicePrice = servicePrice;
         requiredDocument = new ArrayList<DocumentType>();
         requiredInformation = new ArrayList<String>();
+    }
+    public String getPriceString(){
+        return this.getServicePrice()/100 +"."+this.getServicePrice()%100/10+""+this.getServicePrice()%10;
     }
 
     public String getServiceType() { return serviceType; }

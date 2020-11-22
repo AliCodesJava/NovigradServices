@@ -86,7 +86,7 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                 viewHolder.serviceEditBtn.setTag(position);
                 viewHolder.serviceDocumentsBtn.setTag(position);
 
-                viewHolder.serviceEditBtn.setText("Edit - $ " + service.getServicePrice());
+                viewHolder.serviceEditBtn.setText("Edit - $ " + service.getPriceString());
 
                 viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -135,7 +135,7 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                     viewHolder.serviceApplyBtn.setText("View Applications");
                 }
                 else{
-                    viewHolder.serviceApplyBtn.setText("Apply - $ " + service.getServicePrice());
+                    viewHolder.serviceApplyBtn.setText("Apply - $ " + service.getPriceString());
                 }
             }
         }

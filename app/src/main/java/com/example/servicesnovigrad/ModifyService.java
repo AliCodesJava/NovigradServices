@@ -118,7 +118,6 @@ public class ModifyService extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            Service.serviceList.remove(position);
                             userMessageTxtView.setVisibility(View.VISIBLE);
                             userMessageTxtView.setText("The service " + serviceName + " has been removed.");
                             userMessageTxtView.setTextColor(Color.GREEN);

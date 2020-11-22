@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class ActivityBranch extends AppCompatActivity {
     Employee user = null;
     Intent intent = null;
+    Snackbar statusMsg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +51,35 @@ public class ActivityBranch extends AppCompatActivity {
            streetName.getText().toString().length() == 0 ||
            city.getText().toString().length() == 0 ||
            postalCode.getText().toString().length() == 0
-        ){ return; }
+        ){
+            statusMsg = Snackbar.make(findViewById(android.R.id.content),
+                    "Invalid username/password combination, please try again.",
+                    Snackbar.LENGTH_LONG);
+        }
+        else if(user.getMainBranch() == null){
+            user.resetBranch();
 
-        user.resetBranch();
+            Address branchAddress = new Address(streetNum.getText().toString(),
+                    Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
+                    city.getText().toString(), postalCode.getText().toString());
+            user.getMainBranch().setAddress(branchAddress);
+            user.getMainBranch().setSchedule(new WeeklySchedule());
+            user.getMainBranch().getSchedule().addOpenHours(DayOfWeek.FRIDAY, 0, 300);
+            user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
 
-        Address branchAddress = new Address(streetNum.getText().toString(),
-                Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
-                city.getText().toString(), postalCode.getText().toString());
-        user.getMainBranch().setAddress(branchAddress);
-        user.getMainBranch().setSchedule(new WeeklySchedule());
-        user.getMainBranch().getSchedule().addOpenHours(DayOfWeek.FRIDAY, 0, 300);
-        user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+            DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
 
-        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
-        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+            statusMsg = Snackbar.make(findViewById(android.R.id.content),
+                    "Created Main Branch with given address",
+                    Snackbar.LENGTH_LONG);
+        }
+        else{
+            statusMsg = Snackbar.make(findViewById(android.R.id.content),
+                    "Modified Main Branch with given information",
+                    Snackbar.LENGTH_LONG);
+        }
+
+        statusMsg.show();
     }
 }

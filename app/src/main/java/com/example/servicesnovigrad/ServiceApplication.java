@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 public class ServiceApplication {
     public static ArrayList<ServiceApplication> applications = new ArrayList<>();
-    private String serviceName;
-
-
-
+    private Service service;
     private Client applicant;
-    public ServiceApplication(Client applicant, String name) {
-        this.serviceName = name;
+    public ServiceApplication(Client applicant, Service service) {
+        this.service = service;
         this.applicant = applicant;
         this.applications.add(this);
     }
@@ -23,11 +20,11 @@ public class ServiceApplication {
         this.applicant = applicant;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public Service getService() {
+        return service;
     }
 
-    public void setName(String name) {
-        this.serviceName = name;
+    public void setName(Service name) {
+        this.service = name;
     }
 }

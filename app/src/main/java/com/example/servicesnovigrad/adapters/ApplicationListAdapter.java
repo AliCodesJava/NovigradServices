@@ -73,7 +73,7 @@ public class ApplicationListAdapter extends ArrayAdapter<ServiceApplication> {
         ServiceApplication serviceApplication = getItem(position);
 
         if(serviceApplication != null){
-            viewHolder.serviceName.setText(serviceApplication.getServiceName());
+            viewHolder.serviceName.setText(serviceApplication.getService().getServiceType());
             viewHolder.applicantName.setText(serviceApplication.getApplicant().getUsername());
             if(currentUser != null && currentUser instanceof Employee){
                 viewHolder.rejectBtn.setTag(position);

@@ -116,6 +116,7 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                 });
 
             }
+
             else{
                 viewHolder.serviceApplyBtn.setVisibility(View.VISIBLE);
                 viewHolder.serviceDocumentsBtn.setVisibility(View.GONE);

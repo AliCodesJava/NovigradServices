@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,15 +19,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.servicesnovigrad.adapters.ApplicationListAdapter;
 import com.example.servicesnovigrad.adapters.DocumentsTypeAdapter;
 import com.example.servicesnovigrad.adapters.ServiceListAdapter;
 import com.example.servicesnovigrad.listeners.BtnClickListener;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class ModifyService extends AppCompatActivity {
     private User currentUser = null;
@@ -42,8 +42,8 @@ public class ModifyService extends AppCompatActivity {
     private String clientUserName;
     private String clientUserRole;
 
-    private ListView servicesListView;
-    private ServiceListAdapter servicesAdapter;
+    private ListView listView;
+    private ArrayAdapter adapter;
     private TextView welcomeMessagetxtView;
     private TextView clientTypeTxtView;
 
@@ -65,7 +65,7 @@ public class ModifyService extends AppCompatActivity {
         clientUserRole = intent.getStringExtra(RegisterForm.EXTRA_ROLE);
         //clientUser = new Client("donald", "password", "d@t.ca", "Donald", "Trump");
 
-        servicesListView = (ListView) findViewById(R.id.lstView_services);
+        listView = (ListView) findViewById(R.id.lstView_services);
         userMessageTxtView = (TextView)findViewById(R.id.txtView_user_message) ;
         welcomeMessagetxtView = (TextView)findViewById(R.id.txtView_welcome) ;
         clientTypeTxtView = (TextView)findViewById(R.id.txtView_account_type) ;
@@ -75,112 +75,162 @@ public class ModifyService extends AppCompatActivity {
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         final LayoutInflater inflater = this.getLayoutInflater();
-        if(Service.serviceList.size() == 0){
-            userMessageTxtView.setVisibility(View.VISIBLE);
-            userMessageTxtView.setTextColor(Color.BLACK);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    (float) 1.0
-            );
-            userMessageTxtView.setLayoutParams(param);
-            userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP,36);
-            userMessageTxtView.setText("Sorry, we couldn't find any services.");
-            servicesListView.setVisibility(View.GONE);
-        }
-        else{
-            servicesAdapter = new ServiceListAdapter(
+        if(clientUserRole.equals("Employee")){
+            new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), "Serviceux");
+            new ServiceApplication(new Client("donald1", "password", "d@t.ca", "Donald", "Trump"), "Service22ux");
+            new ServiceApplication(new Client("donald2", "password", "d@t.ca", "Donald", "Trump"), "Serviceu33x");
+            adapter = new ApplicationListAdapter(
                     this,
-                    Service.serviceList,
+                    ServiceApplication.applications,
                     currentUser,
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            if(currentUser instanceof Client){
-                                String serviceName = Service.serviceList.get(position).getServiceType();
-                                userMessageTxtView.setVisibility(View.VISIBLE);
-                                userMessageTxtView.setText("You applied to " + serviceName + " service");
-                                userMessageTxtView.setTextColor(Color.GREEN);
-                                userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                            }
-                        }
-                    },
-                    new BtnClickListener() {
-                        @Override
-                        public void onBtnClick(int position) {
-                            String serviceName = Service.serviceList.get(position).getServiceType();
-
-                            /*
-                             **************************** DELETE FROM DATABASE ALSO *******************
-                             */
-                            try {
-                                AddServiceForm.removeService(serviceName);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            String serviceName = ServiceApplication.applications.get(position).getServiceName();
+                            String applicantName = ServiceApplication.applications.get(position).getApplicant().getUsername();
                             userMessageTxtView.setVisibility(View.VISIBLE);
-                            userMessageTxtView.setText("The service " + serviceName + " has been removed.");
+                            userMessageTxtView.setText("You have approved the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT
-                            );
-                            userMessageTxtView.setLayoutParams(param);
-                            servicesAdapter.notifyDataSetChanged();
+                            //todo remove from DB
+                            ServiceApplication.applications.remove(position);
+                            adapter.notifyDataSetChanged();
                         }
                     },
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            final Service currentService = Service.serviceList.get(position);
+                            String serviceName = ServiceApplication.applications.get(position).getServiceName();
+                            String applicantName = ServiceApplication.applications.get(position).getApplicant().getUsername();
+                            userMessageTxtView.setVisibility(View.VISIBLE);
+                            userMessageTxtView.setText("You have rejected the application of " + applicantName + " for the service :" + serviceName + ".");
+                            userMessageTxtView.setTextColor(Color.RED);
+                            userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                            //todo remove from DB
+                            ServiceApplication.applications.remove(position);
+                            adapter.notifyDataSetChanged();
 
-                            final View userDialogView = inflater.inflate(R.layout.service_list_edit, null);
-                            dialog.setTitle("Edit service");
-                            dialog.setView(userDialogView);
+                        }
+                    },
+                    new BtnClickListener() {
+                        @Override
+                        public void onBtnClick(int position) {
+                            //todo create an activity for viewing an application, and show it on btn click
 
-                            final EditText editNameText = (EditText) userDialogView.findViewById(R.id
-                                    .edtTxt_service_name);
-                            editNameText.setText(currentService.getServiceType());
-                            final EditText editPriceText = (EditText) userDialogView.findViewById(R.id
-                                    .edtTxt_service_price);
-                            editPriceText.setText(currentService.getPriceString());
+                        }
+                    }
+            );
+            userMessageTxtView.setVisibility(View.GONE);
+            listView.setAdapter(adapter);
+        }
+        else{
 
-                            dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+            if(Service.serviceList.size() == 0){
+                userMessageTxtView.setVisibility(View.VISIBLE);
+                userMessageTxtView.setTextColor(Color.BLACK);
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        (float) 1.0
+                );
+                userMessageTxtView.setLayoutParams(param);
+                userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP,36);
+                userMessageTxtView.setText("Sorry, we couldn't find any services.");
+                listView.setVisibility(View.GONE);
+            }
+            else{
+                adapter = new ServiceListAdapter(
+                        this,
+                        Service.serviceList,
+                        currentUser,
+                        new BtnClickListener() {
+                            @Override
+                            public void onBtnClick(int position) {
+                                if(currentUser instanceof Client){
+                                    String serviceName = Service.serviceList.get(position).getServiceType();
                                     userMessageTxtView.setVisibility(View.VISIBLE);
-                                    try{
-                                        changeService(currentService, editNameText.getText().toString(), editPriceText.getText().toString());
-                                        userMessageTxtView.setText("The service " + currentService.getServiceType() + " has been edited.");
-                                        userMessageTxtView.setTextColor(Color.GREEN);
-                                    }
-                                    catch (Exception e){
-                                        userMessageTxtView.setText("The service " + currentService.getServiceType() + " has not been edited.");
-                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        userMessageTxtView.setTextColor(Color.RED);
-                                    }
-                                    userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                                    userMessageTxtView.setText("You applied to " + serviceName + " service");
+                                    userMessageTxtView.setTextColor(Color.GREEN);
+                                    userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14); //todo
                                 }
-                            });
-                            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
+                            }
+                        },
+                        new BtnClickListener() {
+                            @Override
+                            public void onBtnClick(int position) {
+                                String serviceName = Service.serviceList.get(position).getServiceType();
+
+                                /*
+                                 **************************** DELETE FROM DATABASE ALSO *******************
+                                 */
+                                try {
+                                    AddServiceForm.removeService(serviceName);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            });
-                            dialog.show();
-                        }
-                    },
-                    new BtnClickListener() {
-                        @Override
-                        public void onBtnClick(int position) {
-                            final Service currentService = Service.serviceList.get(position);
+                                userMessageTxtView.setVisibility(View.VISIBLE);
+                                userMessageTxtView.setText("The service " + serviceName + " has been removed.");
+                                userMessageTxtView.setTextColor(Color.GREEN);
+                                userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                userMessageTxtView.setLayoutParams(param);
+                                adapter.notifyDataSetChanged();
+                            }
+                        },
+                        new BtnClickListener() {
+                            @Override
+                            public void onBtnClick(int position) {
+                                final Service currentService = Service.serviceList.get(position);
 
-                            final View userDialogView = getDocuments(currentService);
+                                final View userDialogView = inflater.inflate(R.layout.service_list_edit, null);
+                                dialog.setTitle("Edit service");
+                                dialog.setView(userDialogView);
 
-                            final CheckBox chkBox = (CheckBox) userDialogView.findViewById(R.id
-                                    .chkBox_document_added);
+                                final EditText editNameText = (EditText) userDialogView.findViewById(R.id
+                                        .edtTxt_service_name);
+                                editNameText.setText(currentService.getServiceType());
+                                final EditText editPriceText = (EditText) userDialogView.findViewById(R.id
+                                        .edtTxt_service_price);
+                                editPriceText.setText(currentService.getPriceString());
+
+                                dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        userMessageTxtView.setVisibility(View.VISIBLE);
+                                        try{
+                                            changeService(currentService, editNameText.getText().toString(), editPriceText.getText().toString());
+                                            userMessageTxtView.setText("The service " + currentService.getServiceType() + " has been edited.");
+                                            userMessageTxtView.setTextColor(Color.GREEN);
+                                        }
+                                        catch (Exception e){
+                                            userMessageTxtView.setText("The service " + currentService.getServiceType() + " has not been edited.");
+                                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            userMessageTxtView.setTextColor(Color.RED);
+                                        }
+                                        userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                                    }
+                                });
+                                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.show();
+                            }
+                        },
+                        new BtnClickListener() {
+                            @Override
+                            public void onBtnClick(int position) {
+                                final Service currentService = Service.serviceList.get(position);
+
+                                final View userDialogView = getDocuments(currentService);
+
+                                final CheckBox chkBox = (CheckBox) userDialogView.findViewById(R.id
+                                        .chkBox_document_added);
                         /*
                         chkBox.setOnClickListener(new View.OnClickListener(){
                             @Override
@@ -191,20 +241,21 @@ public class ModifyService extends AppCompatActivity {
 
                          */
 
-                            dialog.setTitle("Add or Edit required document");
-                            dialog.setView(userDialogView);
-                            dialog.setNegativeButton("Submit", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
+                                dialog.setTitle("Add or Edit required document");
+                                dialog.setView(userDialogView);
+                                dialog.setNegativeButton("Submit", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.show();
+                            }
                         }
-                    }
-            );
-            userMessageTxtView.setVisibility(View.GONE);
-            servicesListView.setAdapter(servicesAdapter);
+                );
+                userMessageTxtView.setVisibility(View.GONE);
+                listView.setAdapter(adapter);
+            }
         }
 
 
@@ -225,7 +276,7 @@ public class ModifyService extends AppCompatActivity {
         changeServicePrice(service, newPrice);
         Toast.makeText(getApplicationContext(), "This service has successfully been changed in the database.",
                 Toast.LENGTH_SHORT).show();
-        servicesAdapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     public void changeServiceName(Service service, String newServiceName){
@@ -241,7 +292,7 @@ public class ModifyService extends AppCompatActivity {
         service.setServiceType(newServiceName);
         DatabaseHelper.dbr = DatabaseHelper.setToPath("Services");
         DatabaseHelper.dbr.child(newServiceName).setValue(service);
-        servicesAdapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     public void changeServicePrice(Service service, String newServicePrice)throws Exception{

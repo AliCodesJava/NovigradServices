@@ -19,6 +19,9 @@ public class Branch implements Serializable {
     }
 
     public ArrayList<Service> getServiceList() {
+        if(serviceList == null){
+            serviceList = new ArrayList<Service>();
+        }
         return serviceList;
     }
 

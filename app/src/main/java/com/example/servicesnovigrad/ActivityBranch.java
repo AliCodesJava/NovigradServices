@@ -112,8 +112,12 @@ public class ActivityBranch extends AppCompatActivity {
 
     public void addService(View view){
         Spinner spin = findViewById(R.id.spinnerId2);
-        if(user.getMainBranch().getServiceList().contains((Service)spin.getSelectedItem())){
-            user.getMainBranch().getServiceList().add((Service)spin.getSelectedItem());
+        Service serviceToAdd = (Service)spin.getSelectedItem();
+        if(!user.getMainBranch().getServiceList().contains(serviceToAdd)){
+            user.getMainBranch().getServiceList().add(serviceToAdd);
+
+            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+            DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
 
             Snackbar.make(findViewById(android.R.id.content),
                     "Service has been succesfully added !",
@@ -125,5 +129,4 @@ public class ActivityBranch extends AppCompatActivity {
                 "Service is already offered by the branch !",
                 Snackbar.LENGTH_LONG).show();
     }
-
 }

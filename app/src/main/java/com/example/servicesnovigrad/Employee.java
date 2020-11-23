@@ -21,6 +21,8 @@ public class Employee extends Person implements Serializable {
         return employeeID;
     }
     public Branch getMainBranch() {
+        if(mainBranch == null)
+            mainBranch = new Branch();
         return mainBranch;
     }
 

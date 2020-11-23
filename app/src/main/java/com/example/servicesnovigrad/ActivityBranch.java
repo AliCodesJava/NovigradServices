@@ -94,9 +94,30 @@ public class ActivityBranch extends AppCompatActivity {
 
             DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
             DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+
+            Snackbar.make(findViewById(android.R.id.content),
+                        "Schedule has been succesfully added !",
+                        Snackbar.LENGTH_LONG).show();
         }
         catch (Exception e){
-            Snackbar.make(view, "Please make sure your times are in the right format. Ex: 02:32", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, "Please make sure your times are in the right format. Ex: 02:30",
+                          Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    public void addService(View view){
+        Spinner spin = findViewById(R.id.spinnerId2);
+        if(user.getMainBranch().getServiceList().contains((Service)spin.getSelectedItem())){
+            user.getMainBranch().getServiceList().add((Service)spin.getSelectedItem());
+
+            Snackbar.make(findViewById(android.R.id.content),
+                    "Service has been succesfully added !",
+                    Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
+        Snackbar.make(findViewById(android.R.id.content),
+                "Service is already offered by the branch !",
+                Snackbar.LENGTH_LONG).show();
     }
 }

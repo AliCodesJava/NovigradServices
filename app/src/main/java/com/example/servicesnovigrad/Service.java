@@ -55,8 +55,6 @@ public class Service {
     @NonNull
     @Override
     public String toString() {
-        return ("(" + serviceType + "," + servicePrice +
-                "," + (Arrays.toString(requiredDocument.toArray()) +
-                "," + (Arrays.toString(requiredInformation.toArray()))) + ")");
+        return serviceType;
     }
 }

@@ -1,159 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:autofillHints="Appartment Number">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <TextView
-            android:id="@+id/welcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:paddingHorizontal="20sp"
-            android:paddingVertical="5sp"
-            android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/background_dark"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/appNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="Appartment Number"
-            android:inputType="number"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/streetNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="Street Number"
-            android:inputType="textPersonName"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/streetName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="Street Name"
-            android:inputType="textPersonName"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/postalCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="Postal Code"
-            android:inputType="textPersonName"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="City"
-            android:inputType="textPersonName"
-            android:textColor="#000" />
-
-        <TextView
-            android:id="@+id/submitId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:onClick="submitBranch"
-            android:text="ASSOCIATE ACCOUNT TO BRANCH"
-            android:textColor="#0C2A95" />
-
-        <Spinner
-            android:id="@+id/spinnerId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_google_signin_btn_text_dark_default"
+                android:paddingHorizontal="20sp"
+                android:paddingVertical="5sp"
+                android:text="Hi sir, welcome to Service Novigrad"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextTime"
+                android:id="@+id/appNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Opening Time"
-                android:inputType="time" />
+                android:hint="Appartment Number"
+                android:inputType="number"
+                android:textColor="#000" />
 
             <EditText
-                android:id="@+id/editTextTime2"
+                android:id="@+id/streetNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:hint="Closing Time"
-                android:inputType="time" />
+                android:hint="Street Number"
+                android:inputType="textPersonName"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/streetName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Street Name"
+                android:inputType="textPersonName"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/postalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Postal Code"
+                android:inputType="textPersonName"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="City"
+                android:inputType="textPersonName"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/submitId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_horizontal"
+                android:onClick="submitBranch"
+                android:text="ASSOCIATE ACCOUNT TO BRANCH"
+                android:textColor="#0C2A95" />
+
+            <Spinner
+                android:id="@+id/spinnerId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Opening Time"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextTime2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Closing Time"
+                    android:inputType="time" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addHoursId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:onClick="addSchedule"
+                android:text="Add to Schedule"
+                android:textColor="#0C2A95" />
+
+            <TextView
+                android:id="@+id/serviceSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Service status :" />
+
+            <Spinner
+                android:id="@+id/spinnerId2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/addService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:onClick="addService"
+                android:text="Add Service"
+                android:textColor="#0C2A95" />
+
+            <TextView
+                android:id="@+id/removeService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:onClick="removeServices"
+                android:text="Remove Service"
+                android:textColor="#0C2A95" />
+
+            <TextView
+                android:id="@+id/schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/addHoursId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:onClick="addSchedule"
-            android:text="Add to Schedule"
-            android:textColor="#0C2A95" />
-
-        <TextView
-            android:id="@+id/serviceSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Service status :" />
-
-        <Spinner
-            android:id="@+id/spinnerId2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/addService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:onClick="addService"
-            android:text="Add Service"
-            android:textColor="#0C2A95" />
-
-        <TextView
-            android:id="@+id/removeService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:onClick="removeServices"
-            android:text="Remove Service"
-            android:textColor="#0C2A95" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

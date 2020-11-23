@@ -26,7 +26,10 @@ public class Branch implements Serializable {
     }
 
     public Address getAddress() { return address; }
-    public WeeklySchedule getSchedule() { return schedule; }
+    public WeeklySchedule getSchedule() {
+        if(schedule==null)
+            schedule = new WeeklySchedule();
+        return schedule; }
 
     public void setAddress(Address address) { this.address = address; }
     public void setSchedule(WeeklySchedule schedule) {

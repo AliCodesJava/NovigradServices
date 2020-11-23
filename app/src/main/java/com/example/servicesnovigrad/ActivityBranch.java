@@ -54,15 +54,22 @@ public class ActivityBranch extends AppCompatActivity {
         EditText city = findViewById(R.id.city);
         EditText postalCode = findViewById(R.id.postalCode);
 
-        if(streetNum.getText().toString().length() == 0 ||
+        if(postalCode.getText().toString().length() != 6){
+            Snackbar.make(findViewById(android.R.id.content),
+                    "Postal code invalid, should be 6 characters long!",
+                    Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        else if(streetNum.getText().toString().length() == 0 ||
                 appNum.getText().toString().length() == 0 ||
                 streetName.getText().toString().length() == 0 ||
                 city.getText().toString().length() == 0 ||
                 postalCode.getText().toString().length() == 0
         ){
-            statusMsg = Snackbar.make(findViewById(android.R.id.content),
-                    "Some or all fields may be invalid, please try again.",
-                    Snackbar.LENGTH_LONG);
+            Snackbar.make(findViewById(android.R.id.content),
+                    "Do not leave any field empty, please try again.",
+                    Snackbar.LENGTH_LONG).show();
+            return;
         }
         else if(user.getMainBranch() == null){
             user.resetBranch();

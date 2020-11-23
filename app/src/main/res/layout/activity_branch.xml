@@ -10,7 +10,75 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<<<<<<< HEAD
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:paddingHorizontal="20sp"
+            android:paddingVertical="5sp"
+            android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/appNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Appartment Number"
+            android:inputType="number"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/streetNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Street Number"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/streetName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Street Name"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/postalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Postal Code (6 characters)"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="City"
+            android:inputType="textPersonName"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/submitId"
+=======
         <LinearLayout
+>>>>>>> 550be376e9049a1b6d18905dcd20e8dd8064bd09
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

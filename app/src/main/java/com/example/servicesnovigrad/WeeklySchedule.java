@@ -58,12 +58,12 @@ public class WeeklySchedule implements Serializable {
         String s = "";
         for (DayOfWeek day:
              DayOfWeek.values()) {
-            s += day + "/n";
+            s += day + "\n";
             if (openHours.containsKey(day.toString()))
             for (Pair<Integer, Integer> p:
             openHours.get(day.toString())) {
                 s += " from " + p.getFirst()/60 + ":" + p.getFirst()%60;
-                s += " to " + p.getSecond()/60 + ":" + p.getSecond()%60 + "/n";
+                s += " to " + p.getSecond()/60 + ":" + p.getSecond()%60 + "\n";
             }
         }
         return s;

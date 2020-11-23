@@ -15,6 +15,8 @@ import com.example.servicesnovigrad.adapters.ServiceListAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class ActivityBranch extends AppCompatActivity {
     private Employee user;
     private Intent intent;
     private Snackbar statusMsg;
-
+    private TextView info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,9 @@ public class ActivityBranch extends AppCompatActivity {
         Spinner serviceSpinner = (Spinner)findViewById(R.id.spinnerId2);
         serviceSpinner.setAdapter(new ArrayAdapter<Service>(this,
                 android.R.layout.simple_spinner_item, Service.serviceList));
+        info = ((TextView)findViewById(R.id.schedule));
+        info.setSingleLine(false);
+        info.setText(user.getMainBranch().getSchedule().toString());
     }
 
     public void submitBranch(View view) {
@@ -115,6 +120,7 @@ public class ActivityBranch extends AppCompatActivity {
             Snackbar.make(view, "Please make sure your times are in the right format. Ex: 02:30",
                           Snackbar.LENGTH_LONG).show();
         }
+        info.setText(user.getMainBranch().getSchedule().toString());
     }
 
     public void addService(View view){

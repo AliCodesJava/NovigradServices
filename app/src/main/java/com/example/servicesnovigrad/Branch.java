@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Branch implements Serializable {
     private Address address;
     private WeeklySchedule schedule;
+    private ArrayList<Service> serviceList;
     private ArrayList<ServiceApplication> applicationList;
 
     public Branch(){
@@ -15,6 +16,14 @@ public class Branch implements Serializable {
     public Branch(Address address, WeeklySchedule schedule) {
         this.address = address;
         this.schedule = schedule;
+    }
+
+    public ArrayList<Service> getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(ArrayList<Service> serviceList) {
+        this.serviceList = serviceList;
     }
 
     public ArrayList<ServiceApplication> getApplicationList() {

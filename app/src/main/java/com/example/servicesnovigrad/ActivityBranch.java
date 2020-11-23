@@ -80,6 +80,11 @@ public class ActivityBranch extends AppCompatActivity {
 
         statusMsg.show();
     }
+    public void removeServices(View view){
+        Intent newIntent = new Intent(this, ViewServices.class);
+        newIntent.putExtra(RegisterForm.EXTRA_USER, user);
+        startActivity(newIntent);
+    }
     public void addSchedule(View view){
         EditText time1 = findViewById(R.id.editTextTime);
         EditText time2 = findViewById(R.id.editTextTime2);
@@ -120,4 +125,5 @@ public class ActivityBranch extends AppCompatActivity {
                 "Service is already offered by the branch !",
                 Snackbar.LENGTH_LONG).show();
     }
+
 }

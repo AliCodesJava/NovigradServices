@@ -129,7 +129,22 @@ public class ActivityBranch extends AppCompatActivity {
     public void removeOpenHours(View view){
         Spinner spinnerDayRemove = (Spinner)findViewById(R.id.spinner_days_remove);
         EditText position = (EditText) findViewById(R.id.position_hours);
-
+        if(position.getText().toString().length() == 0)
+            Snackbar.make(view,
+                    "Please write the position of the open hours you wish to remove",
+                    Snackbar.LENGTH_LONG).show();
+        else
+            try{
+                user.getMainBranch().getSchedule().removeOpenHours((DayOfWeek) spinnerDayRemove.getSelectedItem(), Integer.parseInt(position.getText().toString())-1);
+            }
+            catch (Exception e){
+                Snackbar.make(view,
+                        e.getMessage(),
+                        Snackbar.LENGTH_LONG).show();
+            }
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
+        info.setText(user.getMainBranch().getSchedule().toString());
     }
 
     public void addService(View view){

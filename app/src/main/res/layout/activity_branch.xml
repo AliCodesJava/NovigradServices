@@ -150,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
+            android:onClick="removeServices"
             android:text="Remove Service"
             android:textColor="#0C2A95" />
 

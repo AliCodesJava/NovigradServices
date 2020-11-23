@@ -117,12 +117,9 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
             }
 
             else{
-                viewHolder.serviceApplyBtn.setVisibility(View.VISIBLE);
-                viewHolder.serviceDocumentsBtn.setVisibility(View.GONE);
-                viewHolder.serviceEditBtn.setVisibility(View.GONE);
-                viewHolder.serviceDeleteBtn.setVisibility(View.GONE);
+                viewHolder.serviceDeleteBtn.setVisibility(View.VISIBLE);
 
-                viewHolder.serviceApplyBtn.setOnClickListener(new View.OnClickListener() {
+                viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(applyListener != null){
@@ -130,13 +127,8 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                         }
                     }
                 });
+                viewHolder.serviceDeleteBtn.setText("Remove this service");
 
-                if(currentUser instanceof Employee){
-                    viewHolder.serviceApplyBtn.setText("View Applications");
-                }
-                else{
-                    viewHolder.serviceApplyBtn.setText("Apply - $ " + service.getPriceString());
-                }
             }
         }
 

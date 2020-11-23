@@ -47,10 +47,10 @@ public class ActivityBranch extends AppCompatActivity {
         EditText postalCode = findViewById(R.id.postalCode);
 
         if(streetNum.getText().toString().length() == 0 ||
-           appNum.getText().toString().length() == 0 ||
-           streetName.getText().toString().length() == 0 ||
-           city.getText().toString().length() == 0 ||
-           postalCode.getText().toString().length() == 0
+                appNum.getText().toString().length() == 0 ||
+                streetName.getText().toString().length() == 0 ||
+                city.getText().toString().length() == 0 ||
+                postalCode.getText().toString().length() == 0
         ){
             statusMsg = Snackbar.make(findViewById(android.R.id.content),
                     "Some or all fields may be invalid, please try again.",
@@ -86,7 +86,8 @@ public class ActivityBranch extends AppCompatActivity {
         Spinner spin = findViewById(R.id.spinnerId);
         try{
             user.getMainBranch().getSchedule().addOpenHours(
-                    (DayOfWeek) spin.getSelectedItem(),(Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
+                    (DayOfWeek) spin.getSelectedItem(),
+                    (Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
                             + Integer.parseInt(""+time1.getText().charAt(3)+time1.getText().charAt(4)) ,
                     (Integer.parseInt(""+time2.getText().charAt(0)+time2.getText().charAt(1))) * 60
                             + Integer.parseInt(""+time2.getText().charAt(3)+time2.getText().charAt(4)));

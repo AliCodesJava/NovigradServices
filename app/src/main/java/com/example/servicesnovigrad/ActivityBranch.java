@@ -86,8 +86,7 @@ public class ActivityBranch extends AppCompatActivity {
         Spinner spin = findViewById(R.id.spinnerId);
         try{
             user.getMainBranch().getSchedule().addOpenHours(
-                    //(DayOfWeek) spin.getSelectedItem(),
-                    DayOfWeek.MONDAY,
+                    (DayOfWeek) spin.getSelectedItem(),
                     (Integer.parseInt(""+time1.getText().charAt(0)+time1.getText().charAt(1))) * 60
                             + Integer.parseInt(""+time1.getText().charAt(3)+time1.getText().charAt(4)) ,
                     (Integer.parseInt(""+time2.getText().charAt(0)+time2.getText().charAt(1))) * 60

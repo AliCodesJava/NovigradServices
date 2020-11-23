@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ems="10"
-            android:hint="Postal Code"
+            android:hint="Postal Code (6 characters)"
             android:inputType="textPersonName"
             android:textColor="#000" />
 

@@ -97,9 +97,11 @@ public class LoginForm extends AppCompatActivity {
                 if(user instanceof AdministratorAccount){
                     intent = new Intent(LoginForm.this, AdminMenu.class);
                 }
-                else{
+                else if(user instanceof Employee){
                     intent = new Intent(LoginForm.this, EmployeeMenu.class);
                 }
+                else
+                    intent = new Intent(LoginForm.this, Accueil.class);
                 intent.putExtra(RegisterForm.EXTRA_USER, user);
                 startActivity(intent);
             }

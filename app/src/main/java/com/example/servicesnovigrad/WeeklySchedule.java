@@ -48,23 +48,27 @@ public class WeeklySchedule implements Serializable {
         if(index<0)
             throw new NullPointerException("Cannot access this position: " + index);
         if (!openHours.containsKey(day.toString()) || openHours.get(day.toString()).size()<=index)
-            throw new InvalidParameterException("This day does not contain any scheduled openHours");
+            throw new InvalidParameterException("This day does not contain such an open hour");
         else
             return openHours.get(day.toString()).remove(index);
     }
 
     @Override
     public String toString() {
+        int i;
         String s = "";
         for (DayOfWeek day:
              DayOfWeek.values()) {
             s += day + "\n";
-            if (openHours.containsKey(day.toString()))
+            if (openHours.containsKey(day.toString())){
+                i=1;
             for (Pair<Integer, Integer> p:
             openHours.get(day.toString())) {
+                s += i+". ";
                 s += " from " + p.getFirst()/60 + ":" + p.getFirst()%60;
                 s += " to " + p.getSecond()/60 + ":" + p.getSecond()%60 + "\n";
-            }
+                i++;
+            }}
         }
         return s;
     }

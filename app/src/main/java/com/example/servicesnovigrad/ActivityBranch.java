@@ -36,6 +36,9 @@ public class ActivityBranch extends AppCompatActivity {
         Spinner spinnerDay = (Spinner)findViewById(R.id.spinnerId);
         spinnerDay.setAdapter(new ArrayAdapter<DayOfWeek>(this,
                 android.R.layout.simple_spinner_item, DayOfWeek.values()));
+        Spinner spinnerDayRemove = (Spinner)findViewById(R.id.spinner_days_remove);
+        spinnerDayRemove.setAdapter(new ArrayAdapter<DayOfWeek>(this,
+                android.R.layout.simple_spinner_item, DayOfWeek.values()));
         Spinner serviceSpinner = (Spinner)findViewById(R.id.spinnerId2);
         serviceSpinner.setAdapter(new ArrayAdapter<Service>(this,
                 android.R.layout.simple_spinner_item, Service.serviceList));
@@ -114,6 +117,12 @@ public class ActivityBranch extends AppCompatActivity {
                           Snackbar.LENGTH_LONG).show();
         }
         info.setText(user.getMainBranch().getSchedule().toString());
+    }
+
+    public void removeOpenHours(View view){
+        Spinner spinnerDayRemove = (Spinner)findViewById(R.id.spinner_days_remove);
+        EditText position = (EditText) findViewById(R.id.position_hours);
+
     }
 
     public void addService(View view){

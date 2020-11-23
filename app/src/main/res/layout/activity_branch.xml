@@ -159,6 +159,25 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
+            <Spinner
+                android:id="@+id/spinner_days_remove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/position_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Open hours to remove (position next to the times)"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove open hours" />
+
         </LinearLayout>
     </ScrollView>
 

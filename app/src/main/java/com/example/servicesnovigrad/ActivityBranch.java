@@ -59,15 +59,6 @@ public class ActivityBranch extends AppCompatActivity {
         else if(user.getMainBranch() == null){
             user.resetBranch();
 
-            Address branchAddress = new Address(streetNum.getText().toString(),
-                    Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
-                    city.getText().toString(), postalCode.getText().toString());
-            user.getMainBranch().setAddress(branchAddress);
-            user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
-
-            DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
-            DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
-
             statusMsg = Snackbar.make(findViewById(android.R.id.content),
                     "Created Main Branch with given address",
                     Snackbar.LENGTH_LONG);
@@ -77,6 +68,15 @@ public class ActivityBranch extends AppCompatActivity {
                     "Modified Main Branch with given information",
                     Snackbar.LENGTH_LONG);
         }
+
+        Address branchAddress = new Address(streetNum.getText().toString(),
+                Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
+                city.getText().toString(), postalCode.getText().toString());
+        user.getMainBranch().setAddress(branchAddress);
+        user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
+
+        DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
+        DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());
 
         statusMsg.show();
     }

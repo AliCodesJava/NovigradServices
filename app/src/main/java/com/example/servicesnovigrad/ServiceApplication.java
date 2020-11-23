@@ -13,6 +13,7 @@ public class ServiceApplication {
         this.applications.add(this);
     }
 
+
     public Client getApplicant() {
         return applicant;
     }

@@ -117,13 +117,15 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
             }
 
             else{
+                viewHolder.serviceApplyBtn.setVisibility(View.GONE);
+                viewHolder.serviceDeleteBtn.setTag(position);
                 viewHolder.serviceDeleteBtn.setVisibility(View.VISIBLE);
 
                 viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(applyListener != null){
-                            applyListener.onBtnClick((Integer) v.getTag());
+                        if(deleteListener != null){
+                            deleteListener.onBtnClick((Integer) v.getTag());
                         }
                     }
                 });

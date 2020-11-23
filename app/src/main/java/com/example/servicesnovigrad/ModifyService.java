@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +31,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ModifyService extends AppCompatActivity {
-    private User currentUser = null;
-    private Intent intent = null;
+    private User currentUser;
+    private Intent intent;
 
     private TextView inputText;
     private TextView selectedServiceStatus;
@@ -59,7 +60,7 @@ public class ModifyService extends AppCompatActivity {
 
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
-        currentUser = (User)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
+        currentUser = (User) LoginForm.user;
 
         clientUserName = currentUser.getUsername();
 

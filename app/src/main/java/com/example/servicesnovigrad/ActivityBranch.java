@@ -19,9 +19,9 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 public class ActivityBranch extends AppCompatActivity {
-    Employee user = null;
-    Intent intent = null;
-    Snackbar statusMsg = null;
+    private Employee user;
+    private Intent intent;
+    private Snackbar statusMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ActivityBranch extends AppCompatActivity {
         setContentView(R.layout.activity_branch);
 
         intent = getIntent();
-        user = (Employee)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
+        user = (Employee)LoginForm.user;
 
         Spinner spinnerDay = (Spinner)findViewById(R.id.spinnerId);
         spinnerDay.setAdapter(new ArrayAdapter<DayOfWeek>(this,

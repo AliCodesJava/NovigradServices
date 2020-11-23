@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.servicesnovigrad.adapters.ServiceListAdapter;
 import com.example.servicesnovigrad.listeners.BtnClickListener;
@@ -12,11 +13,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ViewServices extends AppCompatActivity {
     private ArrayAdapter adapter;
+    private Employee employee;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_services);
-        final Employee employee = (Employee)getIntent().getSerializableExtra(RegisterForm.EXTRA_USER);
+        listView = (ListView) findViewById(R.id.service_list);
+        employee = (Employee)LoginForm.user;
          adapter = new ServiceListAdapter(
                 this,
                 employee.getMainBranch().getServiceList(),
@@ -49,5 +53,6 @@ public class ViewServices extends AppCompatActivity {
                     }
                 }
         );
+         listView.setAdapter(adapter);
     }
 }

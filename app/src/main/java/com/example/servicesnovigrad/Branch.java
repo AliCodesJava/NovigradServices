@@ -12,6 +12,7 @@ public class Branch implements Serializable {
     private ArrayList<ServiceApplication> applicationList;
 
     public Branch(){
+        serviceList = new ArrayList<Service>();
     }
     public Branch(Address address, WeeklySchedule schedule) {
         this.address = address;

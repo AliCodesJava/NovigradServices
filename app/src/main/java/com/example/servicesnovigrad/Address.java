@@ -45,6 +45,23 @@ public class Address implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o){
+        Address a;
+        if(o.getClass().equals(this.getClass()))
+            a = (Address)o;
+        else
+            return false;
+        if(
+                this.apartmentNumber==(a.getApartmentNumber()) &&
+                        this.city.equals(a.getCity()) &&
+                        this.postalCode.equals(a.getPostalCode()) &&
+                        this.streetName.equals(a.getStreetName()) &&
+                        this.streetNumber.equals(a.streetNumber)
+        )
+            return true;
+        return false;
+    }
+    @Override
     public String toString() { //TODO prochaine livrable (2) check for official formatting
         return "com.example.servicesnovigrad.Address{" +
                 "streetNumber='" + streetNumber + '\'' +

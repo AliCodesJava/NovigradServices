@@ -13,10 +13,12 @@ public class Branch implements Serializable {
 
     public Branch(){
         serviceList = new ArrayList<Service>();
+        LoginForm.branchList.add(this);
     }
     public Branch(Address address, WeeklySchedule schedule) {
         this.address = address;
         this.schedule = schedule;
+        LoginForm.branchList.add(this);
     }
 
     public ArrayList<Service> getServiceList() {
@@ -25,6 +27,7 @@ public class Branch implements Serializable {
         }
         return serviceList;
     }
+
 
     public void setServiceList(ArrayList<Service> serviceList) {
         this.serviceList = serviceList;

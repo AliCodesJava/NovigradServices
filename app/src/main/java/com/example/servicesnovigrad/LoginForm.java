@@ -14,7 +14,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class LoginForm extends AppCompatActivity {
+    public static ArrayList<Branch> branchList = new ArrayList<>();
     public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

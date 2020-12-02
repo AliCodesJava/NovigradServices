@@ -33,13 +33,7 @@ import java.util.Collections;
 public class ModifyService extends AppCompatActivity {
     private User currentUser;
     private Intent intent;
-
-    private TextView inputText;
-    private TextView selectedServiceStatus;
     private TextView userMessageTxtView;
-
-    private Snackbar validationMsg;
-    private Spinner documentTypeSpinner;
 
     private String clientUserName;
 

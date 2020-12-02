@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class WeeklySchedule implements Serializable {
     private HashMap<String, ArrayList<Pair<Integer, Integer>>> openHours;
 
+
     public WeeklySchedule() {
         openHours = new HashMap();
     }

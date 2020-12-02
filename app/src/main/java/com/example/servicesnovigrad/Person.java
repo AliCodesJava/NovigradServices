@@ -1,9 +1,10 @@
 package com.example.servicesnovigrad;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class Person extends User{
+public class Person extends User implements Serializable {
     private String firstName;
     private String lastName;
     private ArrayList<Address> addressList;

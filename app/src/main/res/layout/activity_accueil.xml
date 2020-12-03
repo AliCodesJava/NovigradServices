@@ -70,6 +70,14 @@
             android:textSize="18sp"
             android:textStyle="italic" />
 
+        <Button
+            android:id="@+id/test_document"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btn_test_document"
+            android:text="Test doc" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

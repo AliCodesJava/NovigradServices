@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class Accueil extends AppCompatActivity {
@@ -17,8 +18,12 @@ public class Accueil extends AppCompatActivity {
         TextView name = findViewById(R.id.nameTextView);
         TextView type = findViewById(R.id.accountTypeTextView);
         User currentUser = (User)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
-        name.setText(LoginForm.branchList.toString());
+        /*name.setText(LoginForm.branchList.toString());
         String userType = currentUser.getClass().toString();
-        type.setText(userType.substring(userType.lastIndexOf(".") + 1));
+        type.setText(userType.substring(userType.lastIndexOf(".") + 1));*/
+    }
+    public void btn_test_document(View view){
+        Intent newIntent = new Intent(this, DocumentCreation.class);
+        startActivity(newIntent);
     }
 }

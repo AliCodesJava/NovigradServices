@@ -27,4 +27,7 @@
     <string name="manageEmployeeMessage">Administrator, which employee account would you like to remove?</string>
     <string name="employeeModification1">Remove this employee account</string>
     <string name="appTitle">Services Novigrad</string>
+    <string name="employeeInfo">Welcome, sir. What would you like to do today?</string>
+    <string name="manageBranch">Manage my branch</string>
+    <string name="manageApplications">Manage my branch\'s applications</string>
 </resources>

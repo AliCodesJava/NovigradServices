@@ -1,67 +1,75 @@
 package com.example.servicesnovigrad;
 
-import androidx.core.util.Pair;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.EnumMap;
+import java.util.HashMap;
 
-public class WeeklySchedule {
-    private EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>> openHours;
+public class WeeklySchedule implements Serializable {
+    private HashMap<String, ArrayList<Pair<Integer, Integer>>> openHours;
+
 
     public WeeklySchedule() {
-        openHours = new EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>>(DayOfWeek.class);
+        openHours = new HashMap();
     }
 
-    public ArrayList<Pair<Short, Short>> getOpenHours(DayOfWeek day) {
-        if (!openHours.containsKey(day))
-            openHours.put(day, new ArrayList<Pair<Short, Short>>());
-        return openHours.get(day);
+    public ArrayList<Pair<Integer, Integer>> getOpenHours(DayOfWeek day) {
+        if (!openHours.containsKey(day.toString()))
+            openHours.put(day.toString(), new ArrayList<Pair<Integer, Integer>>());
+        return openHours.get(day.toString());
     }
-    public EnumMap<DayOfWeek, ArrayList<Pair<Short, Short>>> getOpenHours() {
+    public HashMap<String, ArrayList<Pair<Integer, Integer>>> getOpenHours() {
         return openHours;
+    }
+    public void setOpenHours(HashMap<String, ArrayList<Pair<Integer, Integer>>> openHours){
+        this.openHours = openHours;
     }
 
     /*
         Adds a pair of openingTime, closingTime for a specific day of the week;
         Time is in minutes from 0:00
     */
-    public void addOpenHours(DayOfWeek day, short openingTime, short closingTime) {
+    public void addOpenHours(DayOfWeek day, int openingTime, int closingTime) {
         if (openingTime > closingTime)
             throw new InvalidParameterException("ERROR : Opening time is larger than closing time");
         if (openingTime >= 60 * 24) openingTime = 60 * 24 - 1;
         if (closingTime >= 60 * 24) closingTime = 60 * 24 - 1;
 
-        if (!openHours.containsKey(day))
-            openHours.put(day, new ArrayList<Pair<Short, Short>>());
-        openHours.get(day).add(new Pair<Short, Short>(openingTime, closingTime));
+        if (!openHours.containsKey(day.toString()))
+            openHours.put(day.toString(), new ArrayList<Pair<Integer, Integer>>());
+        openHours.get(day.toString()).add(new Pair<Integer, Integer>(openingTime, closingTime));
     }
     /*
         Removes the pair of openingTime, closingTime of index
         in the array contained for a particular day
     */
-    public Pair<Short, Short> removeOpenHours(DayOfWeek day, int index){
+    public Pair<Integer, Integer> removeOpenHours(DayOfWeek day, int index){
         if(index<0)
             throw new NullPointerException("Cannot access this position: " + index);
-        if (!openHours.containsKey(day) || openHours.get(day).size()<=index)
-            throw new InvalidParameterException("This day does not contain any scheduled openHours");
+        if (!openHours.containsKey(day.toString()) || openHours.get(day.toString()).size()<=index)
+            throw new InvalidParameterException("This day does not contain such an open hour");
         else
-            return openHours.get(day).remove(index);
+            return openHours.get(day.toString()).remove(index);
     }
 
     @Override
     public String toString() {
+        int i;
         String s = "";
         for (DayOfWeek day:
              DayOfWeek.values()) {
-            s += day + "/n";
-            if (openHours.containsKey(day))
-            for (Pair<Short, Short> p:
-            openHours.get(day)) {
-                s += " from " + p.first/60 + ":" + p.first%60;
-                s += " to " + p.second/60 + ":" + p.second%60 + "/n";
-            }
+            s += day + "\n";
+            if (openHours.containsKey(day.toString())){
+                i=1;
+            for (Pair<Integer, Integer> p:
+            openHours.get(day.toString())) {
+                s += i+". ";
+                s += " from " + p.getFirst()/60 + ":" + p.getFirst()%60;
+                s += " to " + p.getSecond()/60 + ":" + p.getSecond()%60 + "\n";
+                i++;
+            }}
         }
         return s;
     }

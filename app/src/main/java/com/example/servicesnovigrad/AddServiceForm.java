@@ -29,7 +29,7 @@ public class AddServiceForm extends AppCompatActivity {
 
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
-        adminAcc = (AdministratorAccount)intent.getSerializableExtra("adminAccountObj");
+        adminAcc = (AdministratorAccount)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
     }
 
     public void addService(View view){
@@ -99,6 +99,7 @@ public class AddServiceForm extends AppCompatActivity {
             errorMessage.show();
         }
     }
+
     public static Service removeService(String serviceName) throws Exception {
         if(serviceName.length() == 0){ throw new Exception("Please write the name of the service you wish to remove. "); }
 
@@ -119,7 +120,7 @@ public class AddServiceForm extends AppCompatActivity {
     public void modifyService(View view){
         intent = new Intent(this, ModifyService.class);
 
-        intent.putExtra("adminAccountObj", adminAcc);
+        intent.putExtra(RegisterForm.EXTRA_USER, adminAcc);
 
         startActivity(intent);
     }

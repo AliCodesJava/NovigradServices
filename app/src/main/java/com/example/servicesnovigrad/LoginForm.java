@@ -14,8 +14,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class LoginForm extends AppCompatActivity {
-    private User user = null;
+    public static ArrayList<Branch> branchList = new ArrayList<>();
+    public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,15 +96,16 @@ public class LoginForm extends AppCompatActivity {
                 /*
                  Tous les roles vont utiliser la meme page pour voir les service mais la fonctionaliter dependra du role
                  */
-                Intent intent = new Intent(LoginForm.this, ModifyService.class);
-
+                Intent intent;
                 if(user instanceof AdministratorAccount){
                     intent = new Intent(LoginForm.this, AdminMenu.class);
                 }
-
-                intent.putExtra(RegisterForm.EXTRA_USERNAME, user.getUsername());
-                intent.putExtra(RegisterForm.EXTRA_ROLE, role.substring(role.lastIndexOf(".") + 1));
-                intent.putExtra("adminAccountObj", user);
+                else if(user instanceof Employee){
+                    intent = new Intent(LoginForm.this, EmployeeMenu.class);
+                }
+                else
+                    intent = new Intent(LoginForm.this, Accueil.class);
+                intent.putExtra(RegisterForm.EXTRA_USER, user);
                 startActivity(intent);
             }
 

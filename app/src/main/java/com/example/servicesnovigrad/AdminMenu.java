@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class AdminMenu extends AppCompatActivity {
-    private User adminAcc = null;
+    private User adminAcc;
     private Intent intent = null;
 
     @Override
@@ -18,7 +18,7 @@ public class AdminMenu extends AppCompatActivity {
 
         intent = getIntent();
 
-        adminAcc = (User)intent.getSerializableExtra("adminAccountObj");
+        adminAcc = (User)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
 
         TextView welcomeMsg = findViewById(R.id.adminInfo2);
         welcomeMsg.setText(welcomeMsg.getText().toString()
@@ -28,21 +28,21 @@ public class AdminMenu extends AppCompatActivity {
     public void manageServices(View view){
         intent = new Intent(this, AddServiceForm.class);
 
-        intent.putExtra("adminAccountObj", adminAcc);
+        intent.putExtra(RegisterForm.EXTRA_USER, adminAcc);
         
         startActivity(intent);
     }
     public void manageClients(View view){
         intent = new Intent(this, ManageClients.class);
 
-        intent.putExtra("adminAccountObj", adminAcc);
+        intent.putExtra(RegisterForm.EXTRA_USER, adminAcc);
 
         startActivity(intent);
     }
     public void manageEmployees(View view){
         intent = new Intent(this, ManageEmployee.class);
 
-        intent.putExtra("adminAccountObj", adminAcc);
+        intent.putExtra(RegisterForm.EXTRA_USER, adminAcc);
 
         startActivity(intent);
     }

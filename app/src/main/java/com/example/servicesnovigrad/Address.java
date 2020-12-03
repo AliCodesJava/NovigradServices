@@ -1,13 +1,15 @@
 package com.example.servicesnovigrad;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     private String streetNumber; // can contain letters, so kept it as a String
     private String streetName;
-    private short apartmentNumber;
+    private int apartmentNumber;
     private String city;
     private String postalCode;
-
-    public Address(String streetNumber, short apartmentNumber, String streetName,
+    public Address(){}
+    public Address(String streetNumber, int apartmentNumber, String streetName,
                    String city, String postalCode) {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
@@ -19,7 +21,7 @@ public class Address {
     public String getStreetNumber() {
         return streetNumber;
     }
-    public short getApartmentNumber() {
+    public int getApartmentNumber() {
         return apartmentNumber;
     }
     public String getStreetName() {
@@ -33,7 +35,7 @@ public class Address {
     }
 
     public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
-    public void setApartmentNumber(short apartmentNumber) { this.apartmentNumber = apartmentNumber; }
+    public void setApartmentNumber(int apartmentNumber) { this.apartmentNumber = apartmentNumber; }
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
@@ -42,6 +44,23 @@ public class Address {
         this.postalCode = postalCode;
     }
 
+    @Override
+    public boolean equals(Object o){
+        Address a;
+        if(o.getClass().equals(this.getClass()))
+            a = (Address)o;
+        else
+            return false;
+        if(
+                this.apartmentNumber==(a.getApartmentNumber()) &&
+                        this.city.equals(a.getCity()) &&
+                        this.postalCode.equals(a.getPostalCode()) &&
+                        this.streetName.equals(a.getStreetName()) &&
+                        this.streetNumber.equals(a.streetNumber)
+        )
+            return true;
+        return false;
+    }
     @Override
     public String toString() { //TODO prochaine livrable (2) check for official formatting
         return "com.example.servicesnovigrad.Address{" +

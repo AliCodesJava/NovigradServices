@@ -19,7 +19,6 @@ import com.example.servicesnovigrad.listeners.BtnClickListener;
 import java.util.ArrayList;
 
 public class ServiceListAdapter extends ArrayAdapter<Service> {
-
     private static class ViewHolder {
         private TextView serviceName;
         private Button serviceApplyBtn;
@@ -86,7 +85,7 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                 viewHolder.serviceEditBtn.setTag(position);
                 viewHolder.serviceDocumentsBtn.setTag(position);
 
-                viewHolder.serviceEditBtn.setText("Edit - $ " + service.getServicePrice());
+                viewHolder.serviceEditBtn.setText("Edit - $ " + service.getPriceString());
 
                 viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,27 +115,22 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                 });
 
             }
-            else{
-                viewHolder.serviceApplyBtn.setVisibility(View.VISIBLE);
-                viewHolder.serviceDocumentsBtn.setVisibility(View.GONE);
-                viewHolder.serviceEditBtn.setVisibility(View.GONE);
-                viewHolder.serviceDeleteBtn.setVisibility(View.GONE);
 
-                viewHolder.serviceApplyBtn.setOnClickListener(new View.OnClickListener() {
+            else{
+                viewHolder.serviceApplyBtn.setVisibility(View.GONE);
+                viewHolder.serviceDeleteBtn.setTag(position);
+                viewHolder.serviceDeleteBtn.setVisibility(View.VISIBLE);
+
+                viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(applyListener != null){
-                            applyListener.onBtnClick((Integer) v.getTag());
+                        if(deleteListener != null){
+                            deleteListener.onBtnClick((Integer) v.getTag());
                         }
                     }
                 });
+                viewHolder.serviceDeleteBtn.setText("Remove this service");
 
-                if(currentUser instanceof Employee){
-                    viewHolder.serviceApplyBtn.setText("View Applications");
-                }
-                else{
-                    viewHolder.serviceApplyBtn.setText("Apply - $ " + service.getServicePrice());
-                }
             }
         }
 

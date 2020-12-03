@@ -16,8 +16,9 @@ public class Accueil extends AppCompatActivity {
 
         TextView name = findViewById(R.id.nameTextView);
         TextView type = findViewById(R.id.accountTypeTextView);
-
-        name.setText(intent.getStringExtra(RegisterForm.EXTRA_USERNAME));
-        type.setText(intent.getStringExtra(RegisterForm.EXTRA_ROLE));
+        User currentUser = (User)intent.getSerializableExtra(RegisterForm.EXTRA_USER);
+        name.setText(LoginForm.branchList.toString());
+        String userType = currentUser.getClass().toString();
+        type.setText(userType.substring(userType.lastIndexOf(".") + 1));
     }
 }

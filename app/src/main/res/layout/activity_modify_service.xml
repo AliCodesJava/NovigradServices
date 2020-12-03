@@ -20,7 +20,6 @@
             android:background="@android:color/holo_orange_dark"
             android:gravity="center_vertical"
             android:text="Service Novigrad"
-            android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="36sp" />
 
@@ -31,31 +30,10 @@
             android:background="@color/common_google_signin_btn_text_dark_default"
             android:paddingHorizontal="20sp"
             android:paddingVertical="5sp"
-            android:text="Hi @{user.firstName}, welcome to Service Novigrad"
+            android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_dark"
             android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:paddingHorizontal="20sp"
-            android:paddingVertical="5sp"
-            android:text="What services are you looking for?"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20sp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Search" />
 
 
         <TextView
@@ -83,7 +61,6 @@
             android:background="@android:color/holo_orange_dark"
             android:gravity="center_vertical"
             android:text="Logged in as @{user.getClass().getName()}"
-            android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp" />
 

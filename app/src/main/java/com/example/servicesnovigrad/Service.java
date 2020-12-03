@@ -2,13 +2,14 @@ package com.example.servicesnovigrad;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Service {
+public class Service implements Serializable {
     public static ArrayList<Service> serviceList = new ArrayList();
     private String serviceType;
-    private int servicePrice;
+    private int servicePrice; // as number of cents
     private ArrayList<DocumentType> requiredDocument;
     private ArrayList<String> requiredInformation;
 
@@ -27,6 +28,9 @@ public class Service {
         requiredDocument = new ArrayList<DocumentType>();
         requiredInformation = new ArrayList<String>();
     }
+    public String getPriceString(){
+        return this.getServicePrice()/100 +"."+this.getServicePrice()%100/10+""+this.getServicePrice()%10;
+    }
 
     public String getServiceType() { return serviceType; }
     public int getServicePrice() { return servicePrice; }
@@ -42,6 +46,10 @@ public class Service {
         this.requiredInformation = requiredInformation;
     }
 
+    @Override
+    public boolean equals(Object o){
+        return this.getServiceType().equals(((Service)o).getServiceType());
+    }
     public boolean addRequiredDoc(DocumentType documentType){ return requiredDocument.add(documentType); }
     public boolean removeRequiredDoc(DocumentType documentType){
         return requiredDocument.remove(documentType);
@@ -52,8 +60,6 @@ public class Service {
     @NonNull
     @Override
     public String toString() {
-        return ("(" + serviceType + "," + servicePrice +
-                "," + (Arrays.toString(requiredDocument.toArray()) +
-                "," + (Arrays.toString(requiredInformation.toArray()))) + ")");
+        return serviceType;
     }
 }

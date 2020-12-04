@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServiceApplicationForm" />
-        <activity android:name=".ViewServices"></activity>
+        <activity android:name=".DocumentCreation"></activity>
+        <activity android:name=".ViewServices" />
         <activity android:name=".ActivityBranch" />
         <activity android:name=".ManageEmployee" />
         <activity android:name=".ManageClients" />

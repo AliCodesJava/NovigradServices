@@ -5,6 +5,11 @@
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="Password2">Please repeat your password</string>
+    <string name="Address">Address</string>
+    <string name="DOB">Date of Birth</string>
+    <string name="Docs">Documents</string>
+    <string name="UploadDocs">Upload Documents</string>
+    <string name="UploadDocsLabel">Click on icons below to upload</string>
     <string name="EmailAddress">Email address</string>
     <string name="SubmitRegisterForm">Submit</string>
     <string name="employeeCheckBox">Are you a Novigrad employee? Check this box to create an employee account.</string>

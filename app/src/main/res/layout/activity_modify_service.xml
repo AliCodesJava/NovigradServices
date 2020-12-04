@@ -14,27 +14,13 @@
         tools:layout_editor_absoluteY="70dp">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txtView_branches_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_dark"
-            android:gravity="center_vertical"
-            android:text="Service Novigrad"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/txtView_welcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:paddingHorizontal="20sp"
-            android:paddingVertical="5sp"
-            android:text="Hi @{user.getUserName()}, welcome to Service Novigrad"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/background_dark"
-            android:textSize="24sp" />
-
+            android:padding="20sp"
+            android:text="Services"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
 
         <TextView
             android:id="@+id/txtView_user_message"
@@ -52,15 +38,19 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingHorizontal="20sp"
-            android:paddingVertical="10sp" />
+            android:paddingVertical="10sp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="20.0sp"/>
 
         <TextView
             android:id="@+id/txtView_account_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_dark"
-            android:gravity="center_vertical"
-            android:text="Logged in as @{user.getClass().getName()}"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_purple"
+            android:gravity="center"
+            android:text="@{user.getClass().getName()}"
+            android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp" />
 

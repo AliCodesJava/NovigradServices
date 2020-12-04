@@ -74,7 +74,8 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
 
         if(service != null){
             viewHolder.serviceName.setText(service.getServiceType());
-            viewHolder.serviceApplyBtn.setTag(position);
+
+            //Admin case
             if(currentUser != null && currentUser instanceof AdministratorAccount){
                 viewHolder.serviceApplyBtn.setVisibility(View.GONE);
                 viewHolder.serviceDocumentsBtn.setVisibility(View.VISIBLE);
@@ -116,21 +117,23 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
 
             }
 
+            // Client case
             else{
-                viewHolder.serviceApplyBtn.setVisibility(View.GONE);
-                viewHolder.serviceDeleteBtn.setTag(position);
-                viewHolder.serviceDeleteBtn.setVisibility(View.VISIBLE);
+                viewHolder.serviceApplyBtn.setTag(position);
+                viewHolder.serviceApplyBtn.setVisibility(View.VISIBLE);
+                viewHolder.serviceDocumentsBtn.setVisibility(View.GONE);
+                viewHolder.serviceEditBtn.setVisibility(View.GONE);
+                viewHolder.serviceDeleteBtn.setVisibility(View.GONE);
+                viewHolder.serviceApplyBtn.setTag(position);
 
-                viewHolder.serviceDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                viewHolder.serviceApplyBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(deleteListener != null){
-                            deleteListener.onBtnClick((Integer) v.getTag());
+                        if(applyListener != null){
+                            applyListener.onBtnClick((Integer) v.getTag());
                         }
                     }
                 });
-                viewHolder.serviceDeleteBtn.setText("Remove this service");
-
             }
         }
 

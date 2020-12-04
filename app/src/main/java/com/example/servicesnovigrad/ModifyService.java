@@ -31,15 +31,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ModifyService extends AppCompatActivity {
+    public static String EXTRA_SERVICE = "com.example.servicesnovigrad.EXTRA_SERVICE";
+
     private User currentUser;
     private Intent intent;
     private TextView userMessageTxtView;
 
-    private String clientUserName;
-
     private ListView listView;
     private ArrayAdapter adapter;
-    private TextView welcomeMessagetxtView;
     private TextView clientTypeTxtView;
 
     @Override
@@ -55,19 +54,15 @@ public class ModifyService extends AppCompatActivity {
         // on prend l'objet du compte admin de l'autre activité a l'aide d'un intent
         intent = getIntent();
         currentUser = (User) LoginForm.user;
-
-        clientUserName = currentUser.getUsername();
-
-        //clientUser = new Client("donald", "password", "d@t.ca", "Donald", "Trump");
+        String clientUsername = currentUser.getUsername();
 
         listView = (ListView) findViewById(R.id.lstView_services);
         userMessageTxtView = (TextView)findViewById(R.id.txtView_user_message) ;
-        welcomeMessagetxtView = (TextView)findViewById(R.id.txtView_welcome) ;
         clientTypeTxtView = (TextView)findViewById(R.id.txtView_account_type) ;
 
-        welcomeMessagetxtView.setText(String.format("Hi %s, welcome to Service Novigrad", (clientUserName == null ? "administrator" : clientUserName)));
         String userType = currentUser.getClass().toString();
-        clientTypeTxtView.setText(String.format("Logged in as %s", userType.substring(userType.lastIndexOf(".") + 1)));
+        clientTypeTxtView.setText(String.format("%s - %s", clientUsername,
+                userType.substring(userType.lastIndexOf(".") + 1)));
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         final LayoutInflater inflater = this.getLayoutInflater();
@@ -161,11 +156,11 @@ public class ModifyService extends AppCompatActivity {
                             @Override
                             public void onBtnClick(int position) {
                                 if(currentUser instanceof Client){
-                                    String serviceName = Service.serviceList.get(position).getServiceType();
-                                    userMessageTxtView.setVisibility(View.VISIBLE);
-                                    userMessageTxtView.setText("You applied to " + serviceName + " service");
-                                    userMessageTxtView.setTextColor(Color.GREEN);
-                                    userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14); //todo
+                                    intent = new Intent(ModifyService.this, ServiceApplicationForm.class);
+                                    intent.putExtra(RegisterForm.EXTRA_USER, currentUser);
+                                    intent.putExtra(ModifyService.EXTRA_SERVICE,
+                                            Service.serviceList.get(position));
+                                    startActivity(intent);
                                 }
                             }
                         },

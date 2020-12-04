@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DocumentCreation"></activity>
+        <activity android:name=".ServiceApplicationForm"></activity>
         <activity android:name=".ViewServices" />
         <activity android:name=".ActivityBranch" />
         <activity android:name=".ManageEmployee" />

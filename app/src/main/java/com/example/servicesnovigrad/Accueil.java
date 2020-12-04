@@ -112,4 +112,9 @@ public class Accueil extends AppCompatActivity {
             listView.setAdapter(adapter);
         }
     }
+
+    public void btn_test_document(View view){
+        Intent newIntent = new Intent(this, DocumentCreation.class);
+        startActivity(newIntent);
+    }
 }

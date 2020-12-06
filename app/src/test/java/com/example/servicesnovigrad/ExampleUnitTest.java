@@ -28,23 +28,6 @@ public class ExampleUnitTest {
         assertEquals("Jaune attend!", service.getServiceType());
         assertEquals(23, service.getServicePrice());
     }
-
-    @Test
-    public void testServiceAddOneRequiredInfo() {
-        Service service = new Service("Jaune attend!", 23);
-        service.addRequiredInfo("This information is necessary");
-        assertEquals("This information is necessary", service.getRequiredInformation().get(0));
-    }
-
-    @Test
-    public void testServiceAddTwoRequiredInfo() {
-        Service service = new Service("Jaune attend!", 23);
-        service.addRequiredInfo("This information is necessary");
-        service.addRequiredInfo("This information is even more necessary!");
-        assertEquals("This information is necessary", service.getRequiredInformation().get(0));
-        assertEquals("This information is even more necessary!", service.getRequiredInformation().get(1));
-    }
-
     @Test
     public void testServiceAddOneRequiredDocumentType() {
         Service service = new Service("Jaune attend!", 23);

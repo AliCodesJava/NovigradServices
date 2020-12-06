@@ -98,7 +98,7 @@ public class Accueil extends AppCompatActivity {
                                             String comments =
                                                     ((EditText)userDialogView.findViewById(R.id.editText_comment_branch)).getText().toString();
 
-                                            /** ADD RATING IN BACKEND */
+                                            /** ADD RATING IN BACKEND -- done*/
                                             Log.i("onClick", String.format("%f %s", rating, comments));
                                             LoginForm.branchList.get(position).getRatings().put(LoginForm.user.getUsername(), rating);
                                             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.branchList.get(position).getEmployeeUserName());

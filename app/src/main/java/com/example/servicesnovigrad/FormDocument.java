@@ -3,14 +3,15 @@ package com.example.servicesnovigrad;
 public class FormDocument extends Document{
     private String firstName;
     private String lastName;
-    private int birthday;
+    private String birthday;
     private LicenseType licenseType;
+    private Address address;
 
     public FormDocument() {
     }
 
-    public FormDocument(DocumentType docType, String docName) {
-        super(docType, docName);
+    public FormDocument(DocumentType docType) {
+        super(docType);
     }
 
     public String getFirstName() {
@@ -29,11 +30,11 @@ public class FormDocument extends Document{
         this.lastName = lastName;
     }
 
-    public int getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -43,5 +44,13 @@ public class FormDocument extends Document{
 
     public void setLicenseType(LicenseType licenseType) {
         this.licenseType = licenseType;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

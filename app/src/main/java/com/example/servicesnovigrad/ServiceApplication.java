@@ -1,9 +1,10 @@
 package com.example.servicesnovigrad;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ServiceApplication {
+public class ServiceApplication implements Serializable {
     private Service service;
     private Client applicant;
     private HashMap<String, ImageDocument> imageDocMap;
@@ -33,10 +34,6 @@ public class ServiceApplication {
 
     public Service getService() {
         return service;
-    }
-
-    public void setName(Service name) {
-        this.service = name;
     }
 
     public void setService(Service service) {

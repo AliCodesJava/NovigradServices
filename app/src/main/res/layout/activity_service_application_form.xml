@@ -6,149 +6,221 @@
     android:layout_height="wrap_content"
     tools:context=".ServiceApplicationForm">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20sp"
-        android:paddingVertical="10sp"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingHorizontal="20sp"
+            android:paddingVertical="10sp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="180dp"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/actor"
+                    android:text="@string/LastName"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="180dp"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/actor"
+                    android:text="@string/FirstName"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/lastNameEditText_service"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Washington"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/firstNameEditText_service"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView9"
-                android:layout_width="180dp"
+                android:id="@+id/textViewAddress"
+                android:layout_width="match_parent"
                 android:layout_height="24dp"
+                android:layout_marginVertical="10sp"
                 android:fontFamily="@font/actor"
-                android:text="@string/LastName"
+                android:text="@string/Address"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="License"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/license_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/textViewDOB"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginVertical="10sp"
+                android:fontFamily="@font/actor"
+                android:text="@string/DOB"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CalendarView
+                android:id="@+id/calendarViewDOB"
+                android:layout_width="match_parent"
+                android:layout_height="301dp"
+                android:longClickable="false"
+                android:maxDate="12/01/2002" />
+
+            <TextView
+                android:id="@+id/textViewDocs"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginVertical="10sp"
+                android:fontFamily="@font/actor"
+                android:text="@string/UploadDocs"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="180dp"
+                android:id="@+id/textViewUploadLabel"
+                android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:fontFamily="@font/actor"
-                android:text="@string/FirstName"
+                android:text="@string/UploadDocsLabel"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/lastNameEditText_service"
-                android:layout_width="180dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Washington"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/firstNameEditText_service"
-                android:layout_width="180dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/caption1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Photo" />
+
+                    <ImageView
+                        android:id="@+id/image1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/caption2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Preuve de Domicile" />
+
+                    <ImageView
+                        android:id="@+id/image2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/caption3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Preuve de status" />
+
+                    <ImageView
+                        android:id="@+id/image3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:srcCompat="@tools:sample/avatars[3]" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_apply_service"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textViewAddress"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="10sp"
-            android:fontFamily="@font/actor"
-            android:text="@string/Address"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/addressEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textViewDOB"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="10sp"
-            android:fontFamily="@font/actor"
-            android:text="@string/DOB"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <CalendarView
-            android:id="@+id/calendarViewDOB"
-            android:layout_width="match_parent"
-            android:layout_height="301dp" />
-
-        <TextView
-            android:id="@+id/textViewDocs"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginVertical="10sp"
-            android:fontFamily="@font/actor"
-            android:text="@string/UploadDocs"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textViewUploadLabel"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:fontFamily="@font/actor"
-            android:text="@string/UploadDocsLabel"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:id="@+id/imgAddDocs"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/add_document_icon" />
-
-            <ImageView
-                android:id="@+id/imgPhotoID"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10sp"
-                app:srcCompat="@drawable/photo_id_icon" />
+                android:layout_marginVertical="10sp"
+                android:background="@color/colorPrimary"
+                android:onClick="applyService"
+                android:text="Apply"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btn_apply_service"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
-            android:background="@color/colorPrimary"
-            android:text="Apply"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

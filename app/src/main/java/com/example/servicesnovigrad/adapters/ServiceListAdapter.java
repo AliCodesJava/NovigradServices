@@ -126,6 +126,8 @@ public class ServiceListAdapter extends ArrayAdapter<Service> {
                 viewHolder.serviceDeleteBtn.setVisibility(View.GONE);
                 viewHolder.serviceApplyBtn.setTag(position);
 
+                viewHolder.serviceApplyBtn.setText("Apply - $ " + service.getPriceString());
+
                 viewHolder.serviceApplyBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

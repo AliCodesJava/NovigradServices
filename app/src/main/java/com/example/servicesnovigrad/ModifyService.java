@@ -26,6 +26,7 @@ import com.example.servicesnovigrad.adapters.DocumentsTypeAdapter;
 import com.example.servicesnovigrad.adapters.ServiceListAdapter;
 import com.example.servicesnovigrad.listeners.BtnClickListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,12 +68,6 @@ public class ModifyService extends AppCompatActivity {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         final LayoutInflater inflater = this.getLayoutInflater();
         if(currentUser instanceof Employee){
-            {   //TEMPORARY, FOR TESTING PURPOSES TODO Remove when client can apply
-                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0)));
-                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(1)));
-                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0)));
-
-            }
             adapter = new ApplicationListAdapter(
                     this,
                     ((Employee)currentUser).getMainBranch().getApplicationList(),
@@ -86,9 +81,10 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setText("You have approved the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                            //todo remove from DB
 
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());
+                            DatabaseHelper.dbr.child("mainBranch").setValue(((Employee)LoginForm.user).getMainBranch());
                             adapter.notifyDataSetChanged();
                         }
                     },
@@ -101,8 +97,10 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setText("You have rejected the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.RED);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                            //todo remove from DB
+
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());
+                            DatabaseHelper.dbr.child("mainBranch").setValue(((Employee)LoginForm.user).getMainBranch());
                             adapter.notifyDataSetChanged();
 
                         }
@@ -160,7 +158,11 @@ public class ModifyService extends AppCompatActivity {
                                 if(currentUser instanceof Client){
                                     intent = new Intent(ModifyService.this, ServiceApplicationForm.class);
                                     intent.putExtra(RegisterForm.EXTRA_USER, currentUser);
-                                    intent.putExtra(ModifyService.EXTRA_SERVICE,
+                                    intent.putExtra(RegisterForm.EXTRA_BRANCH,((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)));
+                                    if(currentUser.getClass().equals(Client.class))
+                                        intent.putExtra(ModifyService.EXTRA_SERVICE,((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)).getServiceList().get(position));
+                                    else
+                                        intent.putExtra(ModifyService.EXTRA_SERVICE,
                                             Service.serviceList.get(position));
                                     startActivity(intent);
                                 }
@@ -334,7 +336,6 @@ public class ModifyService extends AppCompatActivity {
 
     public ListView getDocuments(Service service){
         final ListView requiredDocs = new ListView(this);
-
         try{
             final ArrayList<DocumentType> docTypes = new ArrayList<DocumentType>();
             Collections.addAll(docTypes, DocumentType.values());

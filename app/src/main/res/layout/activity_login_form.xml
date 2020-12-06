@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal"
-                android:textAlignment="textStart">
+                android:textAlignment="center">
 
                 <TextView
                     android:id="@+id/textView3"

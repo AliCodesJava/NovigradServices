@@ -68,39 +68,41 @@ public class ModifyService extends AppCompatActivity {
         final LayoutInflater inflater = this.getLayoutInflater();
         if(currentUser instanceof Employee){
             {   //TEMPORARY, FOR TESTING PURPOSES TODO Remove when client can apply
-                new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0));
-                new ServiceApplication(new Client("donald1", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(1));
-                new ServiceApplication(new Client("donald2", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0));
+                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0)));
+                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(1)));
+                ((Employee)currentUser).getMainBranch().getApplicationList().add(new ServiceApplication(new Client("donald", "password", "d@t.ca", "Donald", "Trump"), Service.serviceList.get(0)));
+
             }
             adapter = new ApplicationListAdapter(
                     this,
-                    ServiceApplication.applications,
+                    ((Employee)currentUser).getMainBranch().getApplicationList(),
                     currentUser,
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            String serviceName = ServiceApplication.applications.get(position).getService().getServiceType();
-                            String applicantName = ServiceApplication.applications.get(position).getApplicant().getUsername();
+                            String serviceName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getService().getServiceType();
+                            String applicantName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername();
                             userMessageTxtView.setVisibility(View.VISIBLE);
                             userMessageTxtView.setText("You have approved the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                             //todo remove from DB
-                            ServiceApplication.applications.remove(position);
+
+                            ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             adapter.notifyDataSetChanged();
                         }
                     },
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            String serviceName = ServiceApplication.applications.get(position).getService().getServiceType();
-                            String applicantName = ServiceApplication.applications.get(position).getApplicant().getUsername();
+                            String serviceName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getService().getServiceType();
+                            String applicantName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername();
                             userMessageTxtView.setVisibility(View.VISIBLE);
                             userMessageTxtView.setText("You have rejected the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.RED);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                             //todo remove from DB
-                            ServiceApplication.applications.remove(position);
+                            ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             adapter.notifyDataSetChanged();
 
                         }
@@ -108,10 +110,10 @@ public class ModifyService extends AppCompatActivity {
                     new BtnClickListener() {
                         @Override
                         public void onBtnClick(int position) {
-                            String serviceName = ServiceApplication.applications.get(position).getService().getServiceType();
-                            String applicantFirstName = ServiceApplication.applications.get(position).getApplicant().getFirstName();
-                            String applicantLastName = ServiceApplication.applications.get(position).getApplicant().getLastName();
-                            String applicantEmail = ServiceApplication.applications.get(position).getApplicant().getEmailAddress();
+                            String serviceName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getService().getServiceType();
+                            String applicantFirstName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getFirstName();
+                            String applicantLastName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getLastName();
+                            String applicantEmail = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getEmailAddress();
 
                             final View userDialogView = inflater.inflate(R.layout.application_view, null);
                             dialog.setTitle("Application:");
@@ -150,7 +152,7 @@ public class ModifyService extends AppCompatActivity {
             else{
                 adapter = new ServiceListAdapter(
                         this,
-                        Service.serviceList,
+                        (currentUser.getClass().equals(Client.class)) ? ((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)).getServiceList() : Service.serviceList,
                         currentUser,
                         new BtnClickListener() {
                             @Override

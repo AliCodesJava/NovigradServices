@@ -44,9 +44,26 @@ public class Address implements Serializable {
         this.postalCode = postalCode;
     }
 
+    /*
+        Checks if the elements of the input, split on spaces,
+        (turned bare-bone) is contained in the address
+     */
+    public boolean contains(String s){
+        String[] elems = s.split(" ");
+        for (String elem:
+                elems) {
+            if(!this.toString().toLowerCase().contains(elem.toLowerCase())){
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object o){
         Address a;
+        if(o == null)
+            return false;
         if(o.getClass().equals(this.getClass()))
             a = (Address)o;
         else

@@ -1,16 +1,25 @@
 package com.example.servicesnovigrad;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServiceApplication {
-    //todo make application lists in branch, not here
-    public static ArrayList<ServiceApplication> applications = new ArrayList<>();
     private Service service;
     private Client applicant;
+    private HashMap<String, ImageDocument> imageDocMap;
+    private FormDocument form;
+
+    public ServiceApplication(){
+
+    }
     public ServiceApplication(Client applicant, Service service) {
         this.service = service;
         this.applicant = applicant;
-        this.applications.add(this);
+        imageDocMap = new HashMap<String, ImageDocument>();
+        for (DocumentType docType:
+              service.getRequiredDocument()) {
+            imageDocMap.put(docType.toString(), null); //todo
+        }
     }
 
 
@@ -28,5 +37,25 @@ public class ServiceApplication {
 
     public void setName(Service name) {
         this.service = name;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public HashMap<String, ImageDocument> getImageDocMap() {
+        return imageDocMap;
+    }
+
+    public void setImageDocMap(HashMap<String, ImageDocument> imageDocMap) {
+        this.imageDocMap = imageDocMap;
+    }
+
+    public FormDocument getForm() {
+        return form;
+    }
+
+    public void setForm(FormDocument form) {
+        this.form = form;
     }
 }

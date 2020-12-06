@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.example.servicesnovigrad.WeeklySchedule;
 import com.example.servicesnovigrad.listeners.BtnClickListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class BranchListAdapter extends ArrayAdapter<Branch> {
 
@@ -30,6 +32,7 @@ public class BranchListAdapter extends ArrayAdapter<Branch> {
         private Button evaluateBranchBtn;
         private Button applyServicesBtn;
         private Button infoBranchBtn;
+        private RatingBar rating;
     }
 
     private BtnClickListener evaluateBranchListener;
@@ -58,6 +61,7 @@ public class BranchListAdapter extends ArrayAdapter<Branch> {
                     parent, false);
 
             viewHolder = new BranchListAdapter.ViewHolder();
+            viewHolder.rating = (RatingBar) convertView.findViewById(R.id.ratingBar);
             viewHolder.branchName = (TextView) convertView.findViewById(R.id.txtView_item_branch_name);
             viewHolder.branchAddress = (TextView) convertView.findViewById(R.id.txtView_item_branch_address);
             viewHolder.branchAddress1 = (TextView) convertView.findViewById(R.id.txtView_item_branch_address_1);
@@ -95,6 +99,15 @@ public class BranchListAdapter extends ArrayAdapter<Branch> {
             viewHolder.branchName.setText("Branch " + (position + 1));
             viewHolder.branchAddress.setText(addressTxt);
             viewHolder.branchAddress1.setText(addressTxt1);
+            int i = 0;
+            int sum = 0;
+            for (Map.Entry<String,Float> e:
+                 branch.getRatings().entrySet()) {
+                i++;
+                sum+=e.getValue();
+            }
+            if(i!=0)
+                viewHolder.rating.setRating(sum);
 
             // Add click listeners implementations
             viewHolder.evaluateBranchBtn.setTag(position);

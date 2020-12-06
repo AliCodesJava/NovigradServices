@@ -16,11 +16,8 @@ public class Client extends Person{
     ){
         ArrayList<Branch> branchList = new ArrayList<>();
         for (Branch b:LoginForm.branchList) {
-            for (Pair<Integer, Integer> openHours:
-                 b.getSchedule().getOpenHours(day)) {
-                if(openHours.getFirst()<=time && openHours.getSecond() >= time)
-                    branchList.add(b);
-            }
+            if(b.isOpen(day, time))
+                branchList.add(b);
         }
         return branchList;
     }
@@ -36,11 +33,11 @@ public class Client extends Person{
         return branchList;
     }
     public ArrayList<Branch> getBranchListBy(
-            Address address
+            String addressSearch
     ){
         ArrayList<Branch> branchList = new ArrayList<>();
         for (Branch b:LoginForm.branchList) {
-            if (b.getAddress().equals(address)) {
+            if (b.getAddress().contains(addressSearch)) {
                 branchList.add(b);
             }
         }

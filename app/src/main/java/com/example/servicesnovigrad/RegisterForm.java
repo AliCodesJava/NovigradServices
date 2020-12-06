@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterForm extends AppCompatActivity {
     public static String EXTRA_USER = "com.example.servicesnovigrad.EXTRA_USER";
+    public static String EXTRA_BRANCH = "com.example.servicesnovigrad.EXTRA_BRANCH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -48,6 +48,7 @@ public class ActivityBranch extends AppCompatActivity {
     }
 
     public void submitBranch(View view) {
+        EditText branchNum = findViewById(R.id.editTextNumber);
         EditText streetNum = findViewById(R.id.streetNum);
         EditText appNum = findViewById(R.id.appNum);
         EditText streetName = findViewById(R.id.streetName);
@@ -88,7 +89,9 @@ public class ActivityBranch extends AppCompatActivity {
                 Integer.parseInt(appNum.getText().toString()), streetName.getText().toString(),
                 city.getText().toString(), postalCode.getText().toString());
         user.getMainBranch().setAddress(branchAddress);
+        user.getMainBranch().setBranchNumber(Integer.parseInt(branchNum.getText().toString()));
         user.getMainBranch().setApplicationList(new ArrayList<ServiceApplication>());
+        user.getMainBranch().setEmployeeUserName(LoginForm.user.getUsername());
 
         DatabaseHelper.dbr = DatabaseHelper.setToPath("Users/Employees/" + user.getUsername());
         DatabaseHelper.dbr.child("mainBranch").setValue(user.getMainBranch());

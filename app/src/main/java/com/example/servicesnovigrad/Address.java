@@ -48,6 +48,7 @@ public class Address implements Serializable {
         Checks if the elements of the input, split on spaces,
         (turned bare-bone) is contained in the address
      */
+
     public boolean contains(String s){
         String[] elems = s.split(" ");
         for (String elem:

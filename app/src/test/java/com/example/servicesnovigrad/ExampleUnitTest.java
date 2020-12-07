@@ -61,6 +61,12 @@ public class ExampleUnitTest {
         assertEquals(DocumentType.PREUVE_DE_DOMICILE, service.getRequiredDocument().get(0));
     }
 
+    @Test
+    public void testBranchConstructor() {
+        Branch branch = new Branch(123123,new Address(), new WeeklySchedule());
+
+        assertEquals(branch.getBranchNumber(), 123123);
+    }
 
     @Test
     public void formDocConstructor() {

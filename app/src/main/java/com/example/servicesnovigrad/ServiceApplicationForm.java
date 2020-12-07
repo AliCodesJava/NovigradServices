@@ -296,7 +296,10 @@ public class ServiceApplicationForm extends AppCompatActivity{
     public void applyService(View view){
         ServiceApplication application = new ServiceApplication();
 
-
+        if(edtTxtAddress.getText().toString().equals("") || edtTxtFirstName.getText().toString().equals("") || edtTxtLastName.getText().toString().equals("")){
+            Snackbar.make(view, "Please make sure to fill in the blanks", Snackbar.LENGTH_LONG).show();
+            return;
+        }
         FormDocument form = new FormDocument();
         form.setAddress(new Address());
         form.getAddress().setStreetName(edtTxtAddress.getText().toString());

@@ -13,14 +13,18 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -184,7 +188,14 @@ public class ServiceApplicationForm extends AppCompatActivity{
                 String imagePath = "images/"+LoginForm.user.getUsername()+"/"+"photo";
                 doc1 = new ImageDocument(DocumentType.PHOTO, imagePath);
                 StorageReference ref = imageStorage.child(imagePath);
-                ref.putFile(image);
+                ref.putFile(image).addOnCompleteListener(
+                        new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                updateImg();
+                            }
+                        }
+                );
             }
             else if(requestCode == IMAGE_RESULT2){
                 //image 2
@@ -192,7 +203,14 @@ public class ServiceApplicationForm extends AppCompatActivity{
                 String imagePath = "images/"+LoginForm.user.getUsername()+"/"+"domicile";
                 doc2 = new ImageDocument(DocumentType.PREUVE_DE_DOMICILE, imagePath);
                 StorageReference ref = imageStorage.child(imagePath);
-                ref.putFile(image);
+                ref.putFile(image).addOnCompleteListener(
+                        new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                updateImg();
+                            }
+                        }
+                );
             }
             else if(requestCode == IMAGE_RESULT3){
                 //image 3
@@ -200,9 +218,15 @@ public class ServiceApplicationForm extends AppCompatActivity{
                 String imagePath = "images/"+LoginForm.user.getUsername()+"/"+"status";
                 doc3 = new ImageDocument(DocumentType.PREUVE_DE_STATUS, imagePath);
                 StorageReference ref = imageStorage.child(imagePath);
-                ref.putFile(image);
+                ref.putFile(image).addOnCompleteListener(
+                        new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                updateImg();
+                            }
+                        }
+                );
             }
-            updateImg();
         }
 
     }

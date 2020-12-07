@@ -112,8 +112,10 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-                            String notification = "Your application has been rejected for: " + serviceName;
-
+                            String notification = "Your application has been approved for: " + serviceName;
+                            ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getNotifications().add(notification);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients/");
+                            DatabaseHelper.dbr.child(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername()).setValue(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant());
 
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());
@@ -130,6 +132,12 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setText("You have rejected the application of " + applicantName + " for the service :" + serviceName + ".");
                             userMessageTxtView.setTextColor(Color.RED);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+                            String notification = "Your application has been rejected for: " + serviceName;
+                            ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getNotifications().add(notification);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients/");
+                            DatabaseHelper.dbr.child(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername()).setValue(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant());
+
 
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());

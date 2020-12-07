@@ -29,11 +29,20 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/applicant_email"
+            android:id="@+id/applicant_birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="5sp"
-            android:text="email@email.com"
+            android:text="ss/ss/ssss"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/applicant_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="5sp"
+            android:text="232 dede st"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -42,9 +51,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="5sp"
-            android:text="document"
+            android:text="Documents: "
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/services_novigrad"
+            tools:srcCompat="@drawable/service_novigrad2" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/services_novigrad"
+            tools:srcCompat="@drawable/service_novigrad2" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/services_novigrad"
+            tools:srcCompat="@drawable/service_novigrad2" />
 
     </LinearLayout>
 

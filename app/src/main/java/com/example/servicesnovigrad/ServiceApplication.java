@@ -11,16 +11,12 @@ public class ServiceApplication implements Serializable {
     private FormDocument form;
 
     public ServiceApplication(){
-
+        imageDocMap = new HashMap<String, ImageDocument>();
     }
     public ServiceApplication(Client applicant, Service service) {
         this.service = service;
         this.applicant = applicant;
         imageDocMap = new HashMap<String, ImageDocument>();
-        for (DocumentType docType:
-              service.getRequiredDocument()) {
-            imageDocMap.put(docType.toString(), null); //todo
-        }
     }
 
 

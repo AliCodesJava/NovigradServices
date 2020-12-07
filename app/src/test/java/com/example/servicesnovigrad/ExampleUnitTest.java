@@ -66,6 +66,16 @@ public class ExampleUnitTest {
         Branch branch = new Branch(123123,new Address(), new WeeklySchedule());
 
         assertEquals(branch.getBranchNumber(), 123123);
+        assertNotNull(branch.getAddress());
+        assertNotNull(branch.getSchedule());
+    }
+    @Test
+    public void testBranchConstructorAndRatings() {
+        Branch branch = new Branch(123123,new Address(), new WeeklySchedule());
+        branch.getRatings().put("isudiu", 3.5f);
+        branch.getRatings().put("isudi23u", 1f);
+        assertTrue(branch.getRatings().get("isudiu") == 3.5f);
+        assertTrue(branch.getRatings().get("isudi23u") == 1f);
     }
 
     @Test

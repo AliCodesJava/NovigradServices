@@ -112,7 +112,7 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-                            String notification = "Your application has been rejected for : " + serviceName;
+                            String notification = "Your application has been rejected for: " + serviceName;
 
 
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);

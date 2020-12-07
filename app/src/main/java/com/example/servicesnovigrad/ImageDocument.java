@@ -16,7 +16,7 @@ public class ImageDocument extends Document{
         return docName;
     }
 
-    public void setDocName(String userName) {
-        this.docName = userName+this.getDocType();
+    public void setDocName(String docName) {
+        this.docName = docName;
     }
 }

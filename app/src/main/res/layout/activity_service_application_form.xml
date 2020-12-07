@@ -142,12 +142,15 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/layoutpics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <LinearLayout
+                    android:id="@+id/groupe1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -161,13 +164,15 @@
 
                     <ImageView
                         android:id="@+id/image1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:onClick="btnAddImg1"
+                        app:srcCompat="@drawable/service_novigrad2" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/groupe2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -181,13 +186,15 @@
 
                     <ImageView
                         android:id="@+id/image2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:onClick="btnAddImg2"
+                        app:srcCompat="@drawable/service_novigrad2" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/group3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -202,10 +209,12 @@
 
                     <ImageView
                         android:id="@+id/image3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars[3]" />
+                        android:onClick="btnAddImg3"
+                        app:srcCompat="@drawable/service_novigrad2" />
+
                 </LinearLayout>
 
             </LinearLayout>

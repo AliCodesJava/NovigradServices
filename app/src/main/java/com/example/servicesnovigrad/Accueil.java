@@ -146,6 +146,18 @@ public class Accueil extends AppCompatActivity {
             searchBranch.setVisibility(View.VISIBLE);
             listView.setAdapter(adapter);
         }
+        if (((Client)LoginForm.user).getNotifications().size() !=0){
+            String s = "";
+            for (String message:
+            ((Client)LoginForm.user).getNotifications()) {
+                s += message+"  \n";
+            }
+            Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+            ((Client)LoginForm.user).getNotifications().clear();
+            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients/");
+            DatabaseHelper.dbr.child(LoginForm.user.getUsername()).setValue((Client)LoginForm.user);
+
+        }
     }
 
     public void btnSearchService(View view){

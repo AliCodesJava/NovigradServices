@@ -6,18 +6,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +24,16 @@ import com.example.servicesnovigrad.adapters.ApplicationListAdapter;
 import com.example.servicesnovigrad.adapters.DocumentsTypeAdapter;
 import com.example.servicesnovigrad.adapters.ServiceListAdapter;
 import com.example.servicesnovigrad.listeners.BtnClickListener;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class ModifyService extends AppCompatActivity {
     public static String EXTRA_SERVICE = "com.example.servicesnovigrad.EXTRA_SERVICE";
@@ -41,6 +45,32 @@ public class ModifyService extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter adapter;
     private TextView clientTypeTxtView;
+
+    private File img1;
+    private File img2;
+    private File img3;
+
+    {
+        try {
+            img1 = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    {
+        try {
+            img2 = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    {
+        try {
+            img3 = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +112,11 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setTextColor(Color.GREEN);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
+                            String notification = "Your application has been approved for: " + serviceName;
+                            ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getNotifications().add(notification);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients/");
+                            DatabaseHelper.dbr.child(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername()).setValue(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant());
+
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());
                             DatabaseHelper.dbr.child("mainBranch").setValue(((Employee)LoginForm.user).getMainBranch());
@@ -98,6 +133,12 @@ public class ModifyService extends AppCompatActivity {
                             userMessageTxtView.setTextColor(Color.RED);
                             userMessageTxtView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
+                            String notification = "Your application has been rejected for: " + serviceName;
+                            ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getNotifications().add(notification);
+                            DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Clients/");
+                            DatabaseHelper.dbr.child(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getUsername()).setValue(((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant());
+
+
                             ((Employee)currentUser).getMainBranch().getApplicationList().remove(position);
                             DatabaseHelper.dbr = FirebaseDatabase.getInstance().getReference("Users/Employees/" + LoginForm.user.getUsername());
                             DatabaseHelper.dbr.child("mainBranch").setValue(((Employee)LoginForm.user).getMainBranch());
@@ -109,16 +150,71 @@ public class ModifyService extends AppCompatActivity {
                         @Override
                         public void onBtnClick(int position) {
                             String serviceName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getService().getServiceType();
-                            String applicantFirstName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getFirstName();
-                            String applicantLastName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getLastName();
-                            String applicantEmail = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getApplicant().getEmailAddress();
-
+                            String applicantFirstName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getForm().getFirstName();
+                            String applicantLastName = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getForm().getLastName();
+                            String birthday = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getForm().getBirthday();
+                            String address = ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getForm().getAddress().getStreetName();
                             final View userDialogView = inflater.inflate(R.layout.application_view, null);
                             dialog.setTitle("Application:");
                             dialog.setView(userDialogView);
+                            final ImageView imag1 = userDialogView.findViewById(R.id.imageView4);
+                            final ImageView imag2 = userDialogView.findViewById(R.id.imageView5);
+                            final ImageView imag3 = userDialogView.findViewById(R.id.imageView6);
                             ((TextView)userDialogView.findViewById(R.id.service_name)).setText("Service: " + serviceName);
                             ((TextView)userDialogView.findViewById(R.id.applicant_name)).setText("Applicant: " + applicantFirstName + " " + applicantLastName);
-                            ((TextView)userDialogView.findViewById(R.id.applicant_email)).setText("Email: " + applicantEmail);
+                            ((TextView)userDialogView.findViewById(R.id.applicant_birthday)).setText("Birthday: " + birthday);
+                            ((TextView)userDialogView.findViewById(R.id.applicant_address)).setText("Address: " + address);
+                            for (Map.Entry<String, ImageDocument> e:
+                            ((Employee)currentUser).getMainBranch().getApplicationList().get(position).getImageDocMap().entrySet()) {
+                                //image 1
+                                if(e.getKey().equals(DocumentType.PHOTO.toString())) {
+                                    try {
+                                        img1 = File.createTempFile("images", "jpg");
+                                        StorageReference ref = ServiceApplicationForm.imageStorage.child(e.getValue().getDocName());
+                                        ref.getFile(img1).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                                // Get a URL to the uploaded content
+                                                imag1.setImageURI(Uri.fromFile(img1));
+                                            }
+                                        });
+                                    } catch (IOException ioException) {
+                                        ioException.printStackTrace();
+                                    }
+                                }
+                                //image 1
+                                if(e.getKey().equals(DocumentType.PREUVE_DE_DOMICILE.toString())) {
+                                    try {
+                                        img2 = File.createTempFile("images", "jpg");
+                                        StorageReference ref = ServiceApplicationForm.imageStorage.child(e.getValue().getDocName());
+                                        ref.getFile(img2).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                                // Get a URL to the uploaded content
+                                                imag2.setImageURI(Uri.fromFile(img2));
+                                            }
+                                        });
+                                    } catch (IOException ioException) {
+                                        ioException.printStackTrace();
+                                    }
+                                }
+                                //image 1
+                                if(e.getKey().equals(DocumentType.PREUVE_DE_STATUS.toString())) {
+                                    try {
+                                        img3 = File.createTempFile("images", "jpg");
+                                        StorageReference ref = ServiceApplicationForm.imageStorage.child(e.getValue().getDocName());
+                                        ref.getFile(img3).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                                // Get a URL to the uploaded content
+                                                imag3.setImageURI(Uri.fromFile(img3));
+                                            }
+                                        });
+                                    } catch (IOException ioException) {
+                                        ioException.printStackTrace();
+                                    }
+                                }
+                            }
                             dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -159,11 +255,7 @@ public class ModifyService extends AppCompatActivity {
                                     intent = new Intent(ModifyService.this, ServiceApplicationForm.class);
                                     intent.putExtra(RegisterForm.EXTRA_USER, currentUser);
                                     intent.putExtra(RegisterForm.EXTRA_BRANCH,((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)));
-                                    if(currentUser.getClass().equals(Client.class))
-                                        intent.putExtra(ModifyService.EXTRA_SERVICE,((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)).getServiceList().get(position));
-                                    else
-                                        intent.putExtra(ModifyService.EXTRA_SERVICE,
-                                            Service.serviceList.get(position));
+                                    intent.putExtra(ModifyService.EXTRA_SERVICE,((Branch)getIntent().getSerializableExtra(RegisterForm.EXTRA_BRANCH)).getServiceList().get(position));
                                     startActivity(intent);
                                 }
                             }

@@ -11,7 +11,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        missingDimensionStrategy 'react-native-camera', 'general'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
